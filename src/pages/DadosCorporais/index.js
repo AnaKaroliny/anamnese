@@ -8,8 +8,8 @@ import FooterForm from '../../components/FooterForm';
 function DadosCorporais() {
     return (
         <div>
+            <HeaderForm />
             <FormContainer>
-                <HeaderForm />
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicPesoEmJejum">
                         <Form.Label>Peso em Jejum</Form.Label>
@@ -41,8 +41,8 @@ function DadosCorporais() {
                         <Form.Control type="text" placeholder="ex: Musculação, corrida"/>
                     </Form.Group>
                 </Form>
-                <FooterForm numeracao={2} />
             </FormContainer>
+            <FooterForm numeracao={2} anteriorPage={"/"} proximaPage={"/saude"} />
         </div>
     )
 }

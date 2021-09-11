@@ -4,6 +4,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 
 import { Container } from './styles';
+import { Link } from 'react-router-dom';
 
 export default class FooterForm extends React.Component {
     constructor(props) {
@@ -11,26 +12,26 @@ export default class FooterForm extends React.Component {
     }
 
     render() {
-        const { numeracao } = this.props;
+        const { numeracao, anteriorPage, proximaPage } = this.props;
 
         return (
             <Container>
                 <div class="footer">
-                    <a>
+                    <Link to={anteriorPage}>
                         <IconContext.Provider value={{ color: 'black', size: 30 }}>
                             <FaChevronLeft />
                         </IconContext.Provider>
-                    </a>
+                    </Link>
                     <div class="container-numeracao">
                         <label>
                             {numeracao + ' / 5'}
                         </label>
                     </div>
-                    <a>
+                    <Link to={proximaPage}>
                         <IconContext.Provider value={{ color: 'black', size: 30 }}>
                             <FaChevronRight />
                         </IconContext.Provider>
-                    </a>
+                    </Link>
                 </div>
             </Container>
         )

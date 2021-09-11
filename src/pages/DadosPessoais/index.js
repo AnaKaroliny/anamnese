@@ -51,7 +51,7 @@ function DadosPessoais() {
                         </Form>
                     </Form.Group>
                 </Form>
-                <FooterForm numeracao={1} />
+                <FooterForm numeracao={1} anteriorPage={"/"} proximaPage={"/corporal"} />
             </FormContainer>
 
         </div>

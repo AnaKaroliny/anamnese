@@ -8,7 +8,7 @@ import FooterForm from '../../components/FooterForm';
 function DadosDeSaúde() {
     return (
         <div>
-            <HeaderForm title={"Dados de Saúde"} />
+            <HeaderForm />
 
             <FormContainer>
                 <Form>
@@ -29,7 +29,7 @@ function DadosDeSaúde() {
                 </Form>
             </FormContainer>
 
-            <FooterForm numeracao={3} />
+            <FooterForm numeracao={3} anteriorPage={"/corporal"} proximaPage={"/dados"} />
 
         </div>
     )
