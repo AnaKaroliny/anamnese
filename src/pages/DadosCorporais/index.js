@@ -42,7 +42,7 @@ function DadosCorporais() {
                     </Form.Group>
                 </Form>
             </FormContainer>
-            <FooterForm numeracao={2} anteriorPage={"/"} proximaPage={"/saude"} />
+            <FooterForm numberPage={2} backPage={"/"} nextPage={"/saude"} />
         </div>
     )
 }

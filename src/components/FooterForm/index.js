@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
+import { Link } from 'react-router-dom';
 
 import { Container } from './styles';
-import { Link } from 'react-router-dom';
+import colors from '../../styles/colors';
 
 export default class FooterForm extends React.Component {
     constructor(props) {
@@ -12,26 +12,36 @@ export default class FooterForm extends React.Component {
     }
 
     render() {
-        const { numeracao, anteriorPage, proximaPage } = this.props;
+        const { numberPage, backPage, nextPage } = this.props;
 
         return (
             <Container>
                 <div class="footer">
-                    <Link to={anteriorPage}>
-                        <IconContext.Provider value={{ color: 'black', size: 30 }}>
-                            <FaChevronLeft />
-                        </IconContext.Provider>
-                    </Link>
-                    <div class="container-numeracao">
+                    {
+                        backPage ?
+                            <Link to={backPage}>
+                                <IconContext.Provider value={{ color: colors.secondary, size: 30 }}>
+                                    <FaChevronLeft />
+                                </IconContext.Provider>
+                            </Link>
+                        :
+                            <div />
+                    }
+                    <div class="container-numberPage">
                         <label>
-                            {numeracao + ' / 5'}
+                            {numberPage + ' / 6'}
                         </label>
                     </div>
-                    <Link to={proximaPage}>
-                        <IconContext.Provider value={{ color: 'black', size: 30 }}>
-                            <FaChevronRight />
-                        </IconContext.Provider>
-                    </Link>
+                    {
+                        nextPage ? 
+                            <Link to={nextPage}>
+                                <IconContext.Provider value={{ color: colors.secondary, size: 30 }}>
+                                    <FaChevronRight />
+                                </IconContext.Provider>
+                            </Link>
+                        :
+                            <div />
+                    }
                 </div>
             </Container>
         )

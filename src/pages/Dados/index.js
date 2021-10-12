@@ -26,7 +26,7 @@ function Dados() {
                     </Form.Group>
                 </Form>
             </FormContainer>
-            <FooterForm numeracao={4} anteriorPage={"/saude"} proximaPage={"/dados2"} />
+            <FooterForm numberPage={4} backPage={"/saude"} nextPage={"/dados2"} />
 
         </div>
     )

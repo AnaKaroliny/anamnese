@@ -10,7 +10,8 @@ import DadosPessoais from "../pages/DadosPessoais";
 import DadosCorporais from "../pages/DadosCorporais";
 import DadosDeSaude from "../pages/DadosDeSaude";
 import Dados from "../pages/Dados";
-import Dados2 from "../pages/Dados2"
+import Dados2 from "../pages/Dados2";
+import SubmitForm from "../pages/SubmitForm";
 
 export default function App() {
   return (
@@ -33,6 +34,9 @@ export default function App() {
           </Route>
           <Route path="/dados2">
             <Dados2 />
+          </Route>
+          <Route path="/submit">
+            <SubmitForm />
           </Route>
         </Switch>
       </div>

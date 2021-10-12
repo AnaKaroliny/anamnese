@@ -25,7 +25,7 @@ export const Container = styled.div`
         box-shadow: 3px -3px 4px 0px rgba(51,51,51,0.91); */
     }
 
-    .container-numeracao {
+    .container-numberPage {
         background-color: #0000002b;
         font-size: 14px;
         padding-left: 18px;

@@ -29,7 +29,7 @@ function DadosDeSaúde() {
                 </Form>
             </FormContainer>
 
-            <FooterForm numeracao={3} anteriorPage={"/corporal"} proximaPage={"/dados"} />
+            <FooterForm numberPage={3} backPage={"/corporal"} nextPage={"/dados"} />
 
         </div>
     )

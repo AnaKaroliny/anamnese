@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from '../../styles/colors';
 
 export const HeaderContainer = styled.div`
-    background-color: ${colors.black};
+    background-color: ${colors.secondary};
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 `;
@@ -26,7 +26,7 @@ export const TitleContainer = styled.div`
 
     .header-title {
         font-size: 16px;
-        color: ${colors.primary};
+        color: ${colors.darkPrimary};
         font-weight: unset;
     }
 `;
