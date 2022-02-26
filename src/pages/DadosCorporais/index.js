@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Form, Row, Col,} from 'react-bootstrap';
 
 import { FormContainer } from './styles';
 import HeaderForm from '../../components/HeaderForm';
 import FooterForm from '../../components/FooterForm';
+import AppContext from '../../components/AppContext';
 
 function DadosCorporais() {
+    const myContext = useContext(AppContext);
+
     return (
         <div>
             <HeaderForm />
@@ -13,7 +16,7 @@ function DadosCorporais() {
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicPesoEmJejum">
                         <Form.Label>Peso em Jejum</Form.Label>
-                        <Form.Control type="number" />
+                        <Form.Control name="pesoJejum" type="number" onChange={myContext.handleChange.bind(this)} />
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="groupTreino">

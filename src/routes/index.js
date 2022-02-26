@@ -16,39 +16,10 @@ import SubmitForm from "../pages/SubmitForm";
 import Mesociclo from "../pages/Mesociclo";
 import TreinoA from "../pages/TreinoA";
 import TreinoB from "../pages/TreinoB";
-
-
+import FormAluno from "../pages/FormAluno";
 
 function userRoutes() {
-    return (
-        <MemoryRouter>
-            <div>
-                {/* A <Switch> looks through its children <Route>s and
-              renders the first one that matches the current URL. */}
-                <Switch>
-                    {/* User routes */}
-                    <Route exact path="/">
-                        <DadosPessoais />
-                    </Route>
-                    <Route path="/corporal">
-                        <DadosCorporais />
-                    </Route>
-                    <Route path="/saude">
-                        <DadosDeSaude />
-                    </Route>
-                    <Route path="/dados">
-                        <Dados />
-                    </Route>
-                    <Route path="/dados2">
-                        <Dados2 />
-                    </Route>
-                    <Route path="/submit">
-                        <SubmitForm />
-                    </Route>
-                </Switch>
-            </div>
-        </MemoryRouter>
-    );
+    return <FormAluno />
 }
 
 function adminRoutes() {
@@ -64,7 +35,7 @@ function adminRoutes() {
 }
 
 export default function App() {
-    var admin = true;
+    var admin = false;
 
     if (admin) {
         return adminRoutes();
