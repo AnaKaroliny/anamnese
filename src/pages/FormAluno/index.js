@@ -22,9 +22,7 @@ function FormAluno() {
 
     return (
         <AppContext.Provider value={userSettings}>
-            <div className='App'>
-                <AlunoRoutes />
-            </div>
+            <AlunoRoutes />
         </AppContext.Provider>
     );
 }

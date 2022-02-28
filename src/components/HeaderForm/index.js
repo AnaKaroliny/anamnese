@@ -10,16 +10,17 @@ export default class HeaderForm extends React.Component {
 
     render() {
         return (
-            <HeaderContainer>
+            <div>
                 <ImageContainer>
                     <img src={logo} width="80" height="80" class="logo" />
                 </ImageContainer>
+                <HeaderContainer />
                 <TitleContainer>
                     <label class="header-title"  Placeholder xs={12} bg="blue" >
                         Academia Gladius Fitness
                     </label>
                 </TitleContainer>
-            </HeaderContainer>
+            </div>
         )
     }
 }
