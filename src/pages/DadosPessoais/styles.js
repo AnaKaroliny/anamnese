@@ -3,12 +3,12 @@ import colors from '../../styles/colors';
 
 export const FormContainer = styled.div`
     width: 100%;
-    height: 75vh;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding-left: 30px;
+    padding: 30px;
 
     label {
         font-size: 15px;

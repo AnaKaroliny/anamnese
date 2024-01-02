@@ -5,16 +5,6 @@ export const HeaderContainer = styled.div`
     position: relative;
     background-color: ${colors.secondary};
     height: 82px;
-
-    @media(max-width: 420px) {
-        width: 50px;
-        height: 82px;
-        background-color: transparent;
-        border-style: solid;
-        border-width: 50px 0 50px 420px;
-        border-color: ${colors.secondary} transparent transparent ${colors.secondary};
-        overflow: hidden;
-    }
 `;
 
 export const ImageContainer = styled.div`
@@ -34,7 +24,6 @@ export const TitleContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 60px;
 
     .header-title {
         font-family: 'Bebas Neue', cursive;
