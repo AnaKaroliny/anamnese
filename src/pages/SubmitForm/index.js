@@ -26,7 +26,7 @@ class SubmitForm extends React.Component {
     render() {
         return (
             <div>
-                {/* <HeaderForm /> */}
+                <HeaderForm />
                 <FormContainer>
                     <Form onSubmit={this.handleSubmit}>
                     {/* <label>
