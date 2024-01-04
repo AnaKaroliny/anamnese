@@ -68,7 +68,7 @@ class Forms extends React.Component {
                     </div>
                     <ListGroup>
                         {filteredItems.map(item => (
-                            <Link to="/form" key={item.id}>
+                            <Link to={`/form/${item.label}`} key={item.id}>
                                 <ListGroup.Item>{item.label}</ListGroup.Item>
                             </Link>
                         ))}
