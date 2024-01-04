@@ -6,11 +6,11 @@ export default function HeaderForm() {
     return (
         <div>
             <ImageContainer>
-                <img src={logo} width="70" height="70" class="logo" />
+                <img src={logo} width="70" height="70" className="logo" />
             </ImageContainer>
             <HeaderContainer>
                 <TitleContainer>
-                    <label class="header-title" Placeholder xs={12} bg="blue" >
+                    <label className="header-title" xs={12} bg="blue" >
                         Jean treinador
                     </label>
                 </TitleContainer>
