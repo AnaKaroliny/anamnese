@@ -1,8 +1,8 @@
 import React from "react";
 import {
     BrowserRouter as Router,
-    Switch,
     Route,
+    Routes,
     MemoryRouter,
     Redirect
 } from "react-router-dom";
@@ -25,11 +25,11 @@ function userRoutes() {
 function adminRoutes() {
     return (<Router>
         <div>
-            <Switch>
+            <Routes>
                 <Route exact path="/">
                     <TreinoB />
                 </Route>
-            </Switch>
+            </Routes>
         </div>
     </Router>);
 }

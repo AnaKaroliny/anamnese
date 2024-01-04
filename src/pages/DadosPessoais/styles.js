@@ -15,8 +15,4 @@ export const FormContainer = styled.div`
         color: ${colors.darkGrayText};
         font-weight: 500;
     }
-
-    @media(min-height: 700px) {
-        height: 85vh;
-    }
 `;

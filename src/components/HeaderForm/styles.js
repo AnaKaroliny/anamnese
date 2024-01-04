@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import colors from '../../styles/colors';
 
 export const HeaderContainer = styled.div`
-    position: relative;
+    display: flex;
+    justify-content: center;
     background-color: ${colors.secondary};
     height: 82px;
 `;
@@ -21,6 +22,7 @@ export const ImageContainer = styled.div`
 `;
 
 export const TitleContainer = styled.div`
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,7 +30,7 @@ export const TitleContainer = styled.div`
     .header-title {
         font-family: 'Bebas Neue', cursive;
         font-size: 30px;
-        color: ${colors.darkPrimary};
+        color: ${colors.lightBgPanel};
         font-weight: unset;
     }
 `;
