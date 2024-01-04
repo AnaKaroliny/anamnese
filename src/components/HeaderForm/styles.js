@@ -3,13 +3,25 @@ import colors from '../../styles/colors';
 
 export const HeaderContainer = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     background-color: ${colors.secondary};
     height: 82px;
+
+    .social-media {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100px;
+        margin-right: 5px;
+        cursor: pointer;
+
+        a {
+            margin-right: 10px;
+        }
+    }
 `;
 
 export const ImageContainer = styled.div`
-    position: absolute;
     z-index: 1;
     display: flex;
     justify-content: center;
