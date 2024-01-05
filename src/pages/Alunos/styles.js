@@ -42,6 +42,22 @@ export const Container = styled.div`
             input {
                 width: 80%;
             }
-          }
+        }
+
+        .cadastro-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: ${colors.primary};
+            color: ${colors.white};
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .cadastro-button:hover {
+            background-color: ${colors.primaryDark};
+        }
     }
 `;

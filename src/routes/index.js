@@ -21,7 +21,7 @@ function adminRoutes() {
 }
 
 export default function App() {
-    var admin = true;
+    var admin = false;
 
     if (admin) {
         return adminRoutes();

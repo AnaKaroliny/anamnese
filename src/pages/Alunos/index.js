@@ -65,10 +65,13 @@ class Forms extends React.Component {
                             Nome:
                             <input type="text" value={searchQuery} onChange={this.handleSearchChange} />
                         </label>
+                        <Link to="/cadastroExercicio">
+                            <button className="cadastro-button">Cadastrar Exercícios</button>
+                        </Link>
                     </div>
                     <ListGroup>
                         {filteredItems.map(item => (
-                            <Link to={`/form/${item.label}`} key={item.id}>
+                            <Link to={`/aluno/${item.label}`} key={item.id}>
                                 <ListGroup.Item>{item.label}</ListGroup.Item>
                             </Link>
                         ))}

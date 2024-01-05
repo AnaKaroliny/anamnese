@@ -16,6 +16,8 @@ import FormSent from "../../pages/FormSent";
 import Mesociclo from "../../pages/Mesociclo";
 import TreinoA from "../../pages/TreinoA";
 import TreinoB from "../../pages/TreinoB";
+import Treino from "../../pages/Treino";
+import TreinoDiario from "../../pages/TreinoDiario";
 
 function AlunoRoutes() {
     return (
@@ -32,6 +34,8 @@ function AlunoRoutes() {
                     <Route path="/dados2" element={<Dados2 />} />
                     <Route path="/submit" element={<SubmitForm />} />
                     <Route path="/sent" element={<FormSent />} />
+                    <Route path="/treino" element={<Treino />} />
+                    <Route path="/treinoDiario/:dia" element={<TreinoDiario />} />
                 {/* </Switch> */}
                 {/* <Routes> */}
                 </Routes>

@@ -3,14 +3,17 @@ import { HeaderContainer, ImageContainer, TitleContainer } from './styles';
 import logo from '../../assets/images/AcademiaGladiusLogo.jpeg';
 import whatsappLogo from '../../assets/images/whatsapp.png';
 import instagramLogo from '../../assets/images/instagram.png';
+import { Link } from 'react-router-dom';
 
 export default function HeaderForm() {
     return (
         <div>
             <HeaderContainer>
-                <ImageContainer>
-                    <img src={logo} width="70" height="70" className="logo" />
-                </ImageContainer>
+                <Link to="/">
+                    <ImageContainer>
+                        <img src={logo} width="70" height="70" className="logo" />
+                    </ImageContainer>
+                </Link>
                 <TitleContainer>
                     <label className="header-title" xs={12} bg="blue" >
                         Jean treinador
