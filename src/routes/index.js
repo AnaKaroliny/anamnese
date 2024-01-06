@@ -55,6 +55,7 @@ function AllRoutes() {
                 <div>
                     <Routes>
                         <Route exact path="/" element={<Login />} />
+                        <Route path="/anamnese" element={<Login />} />
 
                         {/* User routes */}
                         <Route path="/dadosPessoais" element={<DadosPessoais />} />
