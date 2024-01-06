@@ -2,23 +2,26 @@ import styled from 'styled-components';
 import colors from '../../styles/colors';
 
 export const HeaderContainer = styled.div`
-    position: relative;
+    display: flex;
+    justify-content: space-between;
     background-color: ${colors.secondary};
     height: 82px;
 
-    @media(max-width: 420px) {
-        width: 50px;
-        height: 82px;
-        background-color: transparent;
-        border-style: solid;
-        border-width: 50px 0 50px 420px;
-        border-color: ${colors.secondary} transparent transparent ${colors.secondary};
-        overflow: hidden;
+    .social-media {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100px;
+        margin-right: 5px;
+        cursor: pointer;
+
+        a {
+            margin-right: 10px;
+        }
     }
 `;
 
 export const ImageContainer = styled.div`
-    position: absolute;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -31,15 +34,15 @@ export const ImageContainer = styled.div`
 `;
 
 export const TitleContainer = styled.div`
+    z-index: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-left: 60px;
 
     .header-title {
         font-family: 'Bebas Neue', cursive;
         font-size: 30px;
-        color: ${colors.darkPrimary};
+        color: ${colors.lightBgPanel};
         font-weight: unset;
     }
 `;

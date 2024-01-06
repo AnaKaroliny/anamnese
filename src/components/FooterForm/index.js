@@ -19,7 +19,9 @@ export default function navBottomButton({ numberPage, backPage, nextPage }) {
                                 </IconContext.Provider>
                             </Link>
                             :
-                            <div />
+                            <IconContext.Provider value={{ size: 30 }}>
+                                <FaChevronLeft className="disabled"/>
+                            </IconContext.Provider>
                     }
                     <div class="container-numberPage">
                         <label>
@@ -34,7 +36,9 @@ export default function navBottomButton({ numberPage, backPage, nextPage }) {
                                 </IconContext.Provider>
                             </Link>
                             :
-                            <div />
+                            <IconContext.Provider value={{ size: 30 }}>
+                                <FaChevronLeft className="disabled"/>
+                            </IconContext.Provider>
                     }
                 </div>
             </Footer>
