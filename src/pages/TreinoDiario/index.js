@@ -11,15 +11,15 @@ const exercicios = [
     repeticoes: 10,
     descanso: '1 min.',
     observacao: 'Manter a postura correta',
-    gif: 'http://muscul.az.free.fr/pt/Mc25.gif'
+    gif: 'https://i.pinimg.com/originals/18/00/d4/1800d4950bc366c7beb36f079a094ba9.gif'
   },
   {
-    nome: 'Leg press',
+    nome: 'Abdominal',
     serie: 3,
     repeticoes: 15,
     descanso: '1 min.',
     observacao: 'Manter os pés alinhados',
-    gif: 'http://muscul.az.free.fr/pt/mc08m.gif'
+    gif: 'https://i.pinimg.com/originals/41/43/d0/4143d05c3b416208ca2d3d7b8c0264ca.gif'
   },
   {
     nome: 'Terra',
@@ -27,7 +27,7 @@ const exercicios = [
     repeticoes: 15,
     descanso: '1 min.',
     observacao: 'Manter os pés alinhados',
-    gif: 'http://muscul.az.free.fr/pt/Mlomb5b.gif'
+    gif: 'https://i.pinimg.com/originals/c7/94/3c/c7943c2ee3d1bc860a47f25163c9c526.gif'
   },
   {
     nome: 'Flexão de braço',
@@ -35,7 +35,7 @@ const exercicios = [
     repeticoes: 12,
     descanso: '1 min.',
     observacao: 'Manter o corpo alinhado',
-    gif: 'http://muscul.az.free.fr/pt/md15p.gif'
+    gif: 'https://i.pinimg.com/originals/ee/30/fc/ee30fc219a5cb0cb6d3cbf40cf7272f9.gif'
   },
   {
     nome: 'Remada curvada alternada',
@@ -43,7 +43,7 @@ const exercicios = [
     repeticoes: 12,
     descanso: '1 min.',
     observacao: 'Manter o corpo alinhado',
-    gif: 'http://muscul.az.free.fr/pt/md15p.gif'
+    gif: 'https://i.pinimg.com/originals/91/56/8c/91568c7d82bb33367208257810ff262c.gif'
   },
   // Adicione mais exercícios aqui
 ];
@@ -94,7 +94,7 @@ function TreinoDiario() {
                 {expandedRows.includes(index) && (
                   <tr>
                     <td colSpan="6" style={{ textAlign: 'center', verticalAlign: 'middle' }}>
-                      <img src={exercicio.gif} alt="Exemplo de GIF" />
+                      <img src={exercicio.gif} width={'70%'} height={'70%'} alt="Exemplo de GIF" />
                     </td>
                   </tr>
                 )}
