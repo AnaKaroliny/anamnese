@@ -12,7 +12,7 @@ function Login() {
           <Input type="text" placeholder="Usuário" />
           <Input type="password" placeholder="Senha" />
           <Button>Login</Button>
-          <ErrorMessage>Invalid username or password</ErrorMessage>
+          <ErrorMessage>Invalido usuário e senha</ErrorMessage>
         </Form>
       </Container>
     </div>

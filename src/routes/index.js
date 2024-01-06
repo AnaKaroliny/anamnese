@@ -3,7 +3,8 @@ import {
     BrowserRouter as Router,
     Route,
     Routes,
-    Navigate
+    Navigate,
+    HashRouter
 } from "react-router-dom";
 import AppContext from "../components/AppContext";
 
@@ -51,7 +52,9 @@ function AllRoutes() {
 
     return (
         <AppContext.Provider value={userSettings}>
-            <Router>
+            {/* Rota para github pages */}
+            {/* <HashRouter basename={process.env.PUBLIC_URL}> */}
+            <Router basename={process.env.PUBLIC_URL}>
                 <div>
                     <Routes>
                         <Route exact path="/" element={<Login />} />
