@@ -5,7 +5,7 @@ import { FormContainer } from './styles';
 import HeaderForm from '../../components/HeaderForm';
 import FooterForm from '../../components/FooterForm';
 
-class Mesociclo extends React.Component {
+class TreinoB extends React.Component {
     render() {
         return (
             <div>
@@ -149,4 +149,4 @@ class Mesociclo extends React.Component {
     }
 }
 
-export default Mesociclo;
+export default TreinoB;
