@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.4812db70.chunk.css",
-    "main.js": "/static/js/main.3fce3457.chunk.js",
-    "main.js.map": "/static/js/main.3fce3457.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.c7443f6d.js",
-    "runtime-main.js.map": "/static/js/runtime-main.c7443f6d.js.map",
-    "static/css/2.30bc07dc.chunk.css": "/static/css/2.30bc07dc.chunk.css",
-    "static/js/2.2a3be09d.chunk.js": "/static/js/2.2a3be09d.chunk.js",
-    "static/js/2.2a3be09d.chunk.js.map": "/static/js/2.2a3be09d.chunk.js.map",
-    "static/js/3.a5574d0e.chunk.js": "/static/js/3.a5574d0e.chunk.js",
-    "static/js/3.a5574d0e.chunk.js.map": "/static/js/3.a5574d0e.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.30bc07dc.chunk.css.map": "/static/css/2.30bc07dc.chunk.css.map",
-    "static/css/main.4812db70.chunk.css.map": "/static/css/main.4812db70.chunk.css.map",
-    "static/js/2.2a3be09d.chunk.js.LICENSE.txt": "/static/js/2.2a3be09d.chunk.js.LICENSE.txt",
-    "static/media/AcademiaGladiusLogo.89f1dd5f.jpeg": "/static/media/AcademiaGladiusLogo.89f1dd5f.jpeg",
-    "static/media/instagram.4b634a53.png": "/static/media/instagram.4b634a53.png",
-    "static/media/whatsapp.160db6ce.png": "/static/media/whatsapp.160db6ce.png"
+    "main.css": "/anamnese/static/css/main.4812db70.chunk.css",
+    "main.js": "/anamnese/static/js/main.ad899cb3.chunk.js",
+    "main.js.map": "/anamnese/static/js/main.ad899cb3.chunk.js.map",
+    "runtime-main.js": "/anamnese/static/js/runtime-main.472cc62c.js",
+    "runtime-main.js.map": "/anamnese/static/js/runtime-main.472cc62c.js.map",
+    "static/css/2.30bc07dc.chunk.css": "/anamnese/static/css/2.30bc07dc.chunk.css",
+    "static/js/2.5de71323.chunk.js": "/anamnese/static/js/2.5de71323.chunk.js",
+    "static/js/2.5de71323.chunk.js.map": "/anamnese/static/js/2.5de71323.chunk.js.map",
+    "static/js/3.a5574d0e.chunk.js": "/anamnese/static/js/3.a5574d0e.chunk.js",
+    "static/js/3.a5574d0e.chunk.js.map": "/anamnese/static/js/3.a5574d0e.chunk.js.map",
+    "index.html": "/anamnese/index.html",
+    "static/css/2.30bc07dc.chunk.css.map": "/anamnese/static/css/2.30bc07dc.chunk.css.map",
+    "static/css/main.4812db70.chunk.css.map": "/anamnese/static/css/main.4812db70.chunk.css.map",
+    "static/js/2.5de71323.chunk.js.LICENSE.txt": "/anamnese/static/js/2.5de71323.chunk.js.LICENSE.txt",
+    "static/media/AcademiaGladiusLogo.89f1dd5f.jpeg": "/anamnese/static/media/AcademiaGladiusLogo.89f1dd5f.jpeg",
+    "static/media/instagram.4b634a53.png": "/anamnese/static/media/instagram.4b634a53.png",
+    "static/media/whatsapp.160db6ce.png": "/anamnese/static/media/whatsapp.160db6ce.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.c7443f6d.js",
+    "static/js/runtime-main.472cc62c.js",
     "static/css/2.30bc07dc.chunk.css",
-    "static/js/2.2a3be09d.chunk.js",
+    "static/js/2.5de71323.chunk.js",
     "static/css/main.4812db70.chunk.css",
-    "static/js/main.3fce3457.chunk.js"
+    "static/js/main.ad899cb3.chunk.js"
   ]
 }
