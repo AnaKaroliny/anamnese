@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Table, Button, TableRow, TableCell, Input, Select, Option } from './styles';
+import { Container, Form, FormGroup, Label, Input, Button, Title, InputGroup } from './styles';
 import { useParams } from 'react-router-dom';
 
 import HeaderForm from '../../components/HeaderForm';
@@ -9,228 +9,90 @@ function ProfileName() {
     return name;
 }
 
-class Form extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            exercises: [
-                {
-                    exercise: '',
-                    sets: '',
-                    repetitions: '',
-                    restTime: '',
-                    observations: ''
-                }
-            ],
-            daysWeek: [
-                'Segunda-feira',
-                'Terça-feira',
-                'Quarta-feira',
-                'Quinta-feira',
-                'Sexta-feira',
-                'Sábado',
-                'Domingo'
-            ],
-            exercisesPerDay: {
-                segunda: [
-                    {
-                        exercise: '',
-                        sets: '',
-                        repetitions: '',
-                        restTime: '',
-                        observations: ''
-                    }
-                ],
-                terca: [
-                    {
-                        exercise: '',
-                        sets: '',
-                        repetitions: '',
-                        restTime: '',
-                        observations: ''
-                    }
-                ],
-                quarta: [
-                    {
-                        exercise: '',
-                        sets: '',
-                        repetitions: '',
-                        restTime: '',
-                        observations: ''
-                    }
-                ],
-                quinta: [
-                    {
-                        exercise: '',
-                        sets: '',
-                        repetitions: '',
-                        restTime: '',
-                        observations: ''
-                    }
-                ],
-                sexta: [
-                    {
-                        exercise: '',
-                        sets: '',
-                        repetitions: '',
-                        restTime: '',
-                        observations: ''
-                    }
-                ],
-                sabado: [
-                    {
-                        exercise: '',
-                        sets: '',
-                        repetitions: '',
-                        restTime: '',
-                        observations: ''
-                    }
-                ],
-                domingo: [
-                    {
-                        exercise: '',
-                        sets: '',
-                        repetitions: '',
-                        restTime: '',
-                        observations: ''
-                    }
-                ]
-            }
-        };
-    }
-
-    // handleInputChange = (index, event) => {
-    //     const { name, value } = event.target;
-    //     const exercises = [...this.state.exercises];
-    //     exercises[index][name] = value;
-    //     this.setState({ exercises });
-    // };
-
-    // handleAddExercise = () => {
-    //     const exercises = [...this.state.exercises];
-    //     exercises.push({
-    //         muscle: '',
-    //         exercise: '',
-    //         sets: '',
-    //         repetitions: '',
-    //         restTime: '',
-    //         observations: ''
-    //     });
-    //     this.setState({ exercises });
-    // };
-
-    // handleRemoveExercise = (index) => {
-    //     const exercises = [...this.state.exercises];
-    //     exercises.splice(index, 1);
-    //     this.setState({ exercises });
-    // };
-
-    handleInputChange = (day, index, event) => {
-        const { name, value } = event.target;
-        const exercisesPerDay = { ...this.state.exercisesPerDay };
-        exercisesPerDay[day][index][name] = value;
-        this.setState({ exercisesPerDay });
-      };
-      
-      handleAddExercise = (day) => {
-        const exercisesPerDay = { ...this.state.exercisesPerDay };
-        exercisesPerDay[day].push({
-          muscle: '',
-          exercise: '',
-          sets: '',
-          repetitions: '',
-          restTime: '',
-          observations: ''
-        });
-        this.setState({ exercisesPerDay });
-      };
-      
-      handleRemoveExercise = (day, index) => {
-        const exercisesPerDay = { ...this.state.exercisesPerDay };
-        exercisesPerDay[day].splice(index, 1);
-        this.setState({ exercisesPerDay });
-      };
-
+class Aluno extends React.Component {
     render() {
-        const { exercises, daysWeek, exercisesPerDay } = this.state;
         return (
             <div>
                 <HeaderForm />
                 <Container>
-                    <ProfileName />
-                    {Object.keys(exercisesPerDay).map((day, dayIndex) => (
-                        <Table key={dayIndex}>
-                            <h5>{daysWeek[dayIndex]}</h5>
-                            <tbody>
-                                {exercisesPerDay[day].map((exercise, index) => (
-                                <TableRow key={index}>
-                                    <TableCell>
-                                        <TableCell>Exercício</TableCell>
-                                        <Select
-                                            name="exercise"
-                                            value={exercise.exercise}
-                                            onChange={(event) => this.handleInputChange(day, index, event)}
-                                        >
-                                            <Option value="">Selecione</Option>
-                                            {/* Adicione as opções de exercícios aqui */}
-                                        </Select>
-                                    </TableCell>
-                                    <TableCell>
-                                        <TableCell>Séries</TableCell>
-                                        <Select
-                                            name="sets"
-                                            value={exercise.sets}
-                                            onChange={(event) => this.handleInputChange(day, index, event)}
-                                        >
-                                            <Option value="">Selecione</Option>
-                                            {/* Adicione as opções de séries aqui */}
-                                    </Select>
-                                    </TableCell>
-                                    <TableCell>
-                                        <TableCell>Repetições</TableCell>
-                                        <Input
-                                            type="text"
-                                            name="repetitions"
-                                            value={exercise.repetitions}
-                                            onChange={(event) => this.handleInputChange(day, index, event)}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                        <TableCell>Tempo de Descanso</TableCell>
-                                        <Select
-                                            name="restTime"
-                                            value={exercise.restTime}
-                                            onChange={(event) => this.handleInputChange(day, index, event)}
-                                        >
-                                            <Option value="">Selecione</Option>
-                                        </Select>
-                                    </TableCell>
-                                    <TableCell>
-                                        <TableCell>Observações</TableCell>
-                                        <Input
-                                            type="text"
-                                            name="observations"
-                                            value={exercise.observations}
-                                            onChange={(event) => this.handleInputChange(day, index, event)}
-                                        />
-                                    </TableCell>
-                                    <TableCell>
-                                    {index === exercisesPerDay[day].length - 1 && (
-                                        <Button onClick={() => this.handleAddExercise(day)}>+</Button>
-                                    )}
-                                    {index !== exercisesPerDay[day].length - 1 && (
-                                        <Button onClick={() => this.handleRemoveExercise(day, index)}>x</Button>
-                                    )}
-                                    </TableCell>
-                                </TableRow>
-                                ))}
-                            </tbody>
-                        </Table>
-                    ))};
+                    <Title>Formulário de medidas de <ProfileName /></Title>
+                    <Form>
+                        <div className="form-group">
+                            <FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="pescoço">Pescoço</Label>
+                                    <Input type="number" id="pescoço" name="pescoço" />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="ombro">Ombro relaxado</Label>
+                                    <InputGroup>
+                                        <Input type="number" id="ombro-direito" name="ombro-direito" placeholder="Direito" />
+                                        <Input type="number" id="ombro-esquerdo" name="ombro-esquerdo" placeholder="Esquerdo" />
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="braço-relaxado">Braço relaxado</Label>
+                                    <InputGroup>
+                                        <Input type="number" id="braço-relaxado-direito" name="braço-relaxado-direito" placeholder="Direito" />
+                                        <Input type="number" id="braço-relaxado-esquerdo" name="braço-relaxado-esquerdo" placeholder="Esquerdo" />
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="braço-contraído">Braço contraído</Label>
+                                    <InputGroup>
+                                        <Input type="number" id="braço-contraído-direito" name="braço-contraído-direito" placeholder="Direito" />
+                                        <Input type="number" id="braço-contraído-esquerdo" name="braço-contraído-esquerdo" placeholder="Esquerdo" />
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="antebraço">Antebraço</Label>
+                                    <InputGroup>
+                                        <Input type="number" id="antebraço-direito" name="antebraço-direito" placeholder="Direito" />
+                                        <Input type="number" id="antebraço-esquerdo" name="antebraço-esquerdo" placeholder="Esquerdo" />
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="tórax-relaxado">Tórax Relaxado</Label>
+                                    <Input type="number" id="tórax-relaxado" name="tórax-relaxado" />
+                                </FormGroup>
+                            </FormGroup>
+                            <FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="cintura">Cintura</Label>
+                                    <Input type="number" id="cintura" name="cintura" />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="abdome">Abdome</Label>
+                                    <Input type="number" id="abdome" name="abdome" />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="quadril">Quadril</Label>
+                                    <Input type="number" id="quadril" name="quadril" />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="coxa">Coxa</Label>
+                                    <InputGroup>
+                                        <Input type="number" id="coxa-direita" name="coxa-direita" placeholder="Direita" />
+                                        <Input type="number" id="coxa-esquerda" name="coxa-esquerda" placeholder="Esquerda" />
+                                    </InputGroup>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="panturrilha">Panturrilha</Label>
+                                    <InputGroup>
+                                        <Input type="number" id="panturrilha-direita" name="panturrilha-direita" placeholder="Direita" />
+                                        <Input type="number" id="panturrilha-esquerda" name="panturrilha-esquerda" placeholder="Esquerda" />
+                                    </InputGroup>
+                                </FormGroup>
+                            </FormGroup>
+                        </div>
+                        <div className="form-group-button">
+                            <Button type="submit">Enviar</Button>
+                        </div>
+                    </Form>
                 </Container>
             </div>
         );
     }
 }
 
-export default Form;
+export default Aluno;

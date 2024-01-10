@@ -21,6 +21,7 @@ import TreinoDiario from "../pages/TreinoDiario";
 import Alunos from "../pages/Alunos";
 import Aluno from "../pages/Aluno";
 import CadastroExercicio from "../pages/CadastroExercicio";
+import CadastroTreino from "../pages/CadastroTreino";
 
 import Login from "../pages/Login";
 
@@ -75,6 +76,7 @@ function AllRoutes() {
                         <Route path="/alunos" element={<PrivateRoute><Alunos /></PrivateRoute>} />
                         <Route path="/aluno/:name" element={<PrivateRoute><Aluno /></PrivateRoute>} />
                         <Route path="/cadastroExercicio" element={<PrivateRoute><CadastroExercicio /></PrivateRoute>} />
+                        <Route path="/cadastroTreino/:name" element={<PrivateRoute><CadastroTreino /></PrivateRoute>} />
                     </Routes>
                 </div>
             </Router>

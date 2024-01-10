@@ -1,72 +1,63 @@
+/* styles.js */
 import styled from 'styled-components';
 import colors from '../../styles/colors';
 
 export const Container = styled.div`
+    margin: 0 auto;
+    padding: 20px;
+`;
+
+export const Form = styled.form`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
 
-    h5 {
-        margin: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        color: ${colors.primary};
+    .form-group {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .form-group-button {
+        display: flex;
+        justify-content: center;
     }
 `;
 
-export const Table = styled.table`
-    width: 100%;
-    border-collapse: collapse;
-    border-bottom: 1px solid #ccc;
-`;
-
-export const TableRow = styled.tr`
+export const FormGroup = styled.div`
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 10px;
-
-    @media (max-width: 1000px) {
-        flex-direction: column;
-    }
-`;
-
-export const TableCell = styled.td`
-    flex: 1;
-    padding-bottom: 10px;
+    flex-direction: column;
+    padding-right: 20px;
     width: 100%;
-    margin-right: 10px;
 `;
 
-export const Button = styled.button`
-    margin-top: 30px;
-    padding: 5px 10px;
-    background-color: #ccc;
-    border: none;
-    color: #fff;
-    cursor: pointer;
+export const Label = styled.label`
+    font-weight: bold;
 `;
 
 export const Input = styled.input`
-    margin-bottom: 5px;
-    padding: 5px;
+    padding: 10px;
+    border: 1px solid ${colors.gray};
+    border-radius: 4px;
     width: 100%;
-
-    &:focus {
-        border: 1px solid ${colors.primary};
-    }
 `;
 
-export const Select = styled.select`
-    margin-bottom: 5px;
-    padding: 5px;
-    width: 100%;
-
-     &:focus {
-        border: 1px solid ${colors.primary};
-    }
+export const Button = styled.button`
+    padding: 10px 20px;
+    background-color: ${colors.primary};
+    color: ${colors.white};
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 30%;
 `;
 
-export const Option = styled.option``;
+export const Title = styled.h1`
+    text-align: center;
+    font-size: 26px;
+`;
+
+export const InputGroup = styled.div`
+    display: flex;
+    gap: 10px;
+    width: 100%;
+`;
