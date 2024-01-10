@@ -78,17 +78,17 @@ class Forms extends React.Component {
                                     {item.label}
                                     <div className="group-item-buttons">
                                         {/* Ver informações pessoais do aluno */}
-                                        <Link to={`/alunos`} key={item.id} className="item-button">
+                                        <Link to={`/alunos`} key="info" className="item-button">
                                             <FontAwesomeIcon icon={faAddressCard} />
                                         </Link>
-                                        <Link to={`/aluno/${item.label}`} key={item.id} className="item-button">
+                                        <Link to={`/aluno/${item.label}`} key="aluno" className="item-button">
                                             <FontAwesomeIcon icon={faFileMedical} />
                                         </Link>
-                                        <Link to={`/cadastroTreino/${item.label}`} key={item.id} className="item-button">
+                                        <Link to={`/cadastroTreino/${item.label}`} key="treino" className="item-button">
                                             <FontAwesomeIcon icon={faDumbbell} />
                                         </Link>
                                         {/* Excluir aluno */}
-                                        <Link to={`/alunos`} className="item-button">
+                                        <Link to={`/alunos`} key="excluir" className="item-button">
                                             <FontAwesomeIcon icon={faCircleMinus} />
                                         </Link>
                                     </div>
