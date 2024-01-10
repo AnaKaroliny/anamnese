@@ -60,4 +60,33 @@ export const Container = styled.div`
             background-color: ${colors.primaryDark};
         }
     }
+
+    .group-item {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        .group-item-buttons {
+            display: flex;
+            flex-direction: row;
+            padding: 5px;
+            background-color: ${colors.white};
+            margin-bottom: 5px;
+        }
+
+        .item-button {
+            display: inline-block;
+            padding: 10px;
+            color: ${colors.lightGray};
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 20px;
+        
+            &:hover {
+                color: ${colors.primary};
+            }
+        }
+    }
 `;

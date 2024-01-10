@@ -2,6 +2,8 @@ import React from 'react';
 import { ListGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Container } from './styles';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faDumbbell, faAddressCard, faCircleMinus, faFileMedical } from '@fortawesome/free-solid-svg-icons'
 
 import HeaderForm from '../../components/HeaderForm';
 
@@ -71,9 +73,27 @@ class Forms extends React.Component {
                     </div>
                     <ListGroup>
                         {filteredItems.map(item => (
-                            <Link to={`/aluno/${item.label}`} key={item.id}>
-                                <ListGroup.Item>{item.label}</ListGroup.Item>
-                            </Link>
+                            <ListGroup.Item>
+                                <div className="group-item">
+                                    {item.label}
+                                    <div className="group-item-buttons">
+                                        {/* Ver informações pessoais do aluno */}
+                                        <Link to={`/alunos`} key={item.id} className="item-button">
+                                            <FontAwesomeIcon icon={faAddressCard} />
+                                        </Link>
+                                        <Link to={`/aluno/${item.label}`} key={item.id} className="item-button">
+                                            <FontAwesomeIcon icon={faFileMedical} />
+                                        </Link>
+                                        <Link to={`/cadastroTreino/${item.label}`} key={item.id} className="item-button">
+                                            <FontAwesomeIcon icon={faDumbbell} />
+                                        </Link>
+                                        {/* Excluir aluno */}
+                                        <Link to={`/alunos`} className="item-button">
+                                            <FontAwesomeIcon icon={faCircleMinus} />
+                                        </Link>
+                                    </div>
+                                </div>
+                            </ListGroup.Item>
                         ))}
                     </ListGroup>
                 </Container>
