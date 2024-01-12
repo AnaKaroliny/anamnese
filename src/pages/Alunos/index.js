@@ -6,14 +6,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDumbbell, faAddressCard, faCircleMinus, faFileMedical } from '@fortawesome/free-solid-svg-icons'
 
 import HeaderForm from '../../components/HeaderForm';
+import DadosFormService from '../../services/DadosFormService';
 
 class Forms extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             filter: 'new', // initial filter value
-            searchQuery: '' // initial search query
+            searchQuery: '', // initial search query
+            data: ''
         };
+    }
+
+    componentDidMount() {
+        DadosFormService.getData('test', (dataReceived) => this.setState({data: dataReceived}))
     }
 
     handleFilterChange = (event) => {
@@ -25,7 +31,7 @@ class Forms extends React.Component {
     }
 
     render() {
-        const { filter, searchQuery } = this.state;
+        const { filter, searchQuery, data } = this.state;
 
         // Filter the list items based on the filter value
         const filteredItems = [
@@ -54,6 +60,9 @@ class Forms extends React.Component {
             <div>
                 <HeaderForm />
                 <Container>
+                    <div>
+                        <h1>{data}</h1>
+                    </div>
                     <div className="filter">
                         <label className="filter-select">
                             Selecione:
