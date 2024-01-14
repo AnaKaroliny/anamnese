@@ -10,4 +10,22 @@ export default class DadosFormService {
             callback(data);
         });
     };
+
+    static createAluno(aluno) {
+        const newKey = firebaseDatabase.push(firebaseDatabase.child(firebaseDatabase.ref(db), 'alunos')).key;
+
+        firebaseDatabase.set(firebaseDatabase.ref(db, 'alunos/' + newKey), {
+           nome: aluno.nome,
+           sobrenome: aluno.sobrenome,
+           dataNascimento: aluno.dataNascimento,
+           cidade: aluno.endCidade,
+           estado: aluno.endEstado,
+           telefone: aluno.telefone,
+           dataCadastro: new Date().toLocaleString(),
+           pesoJejum: aluno.pesoJejum,
+           altura: aluno.altura,
+           horarioTreino: aluno.horarioTreino,
+           tipoTreino: aluno.tipoTreino,
+        });
+    }
 }

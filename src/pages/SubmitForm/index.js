@@ -5,8 +5,12 @@ import { Navigate } from "react-router-dom";
 import { FormContainer } from './styles';
 import HeaderForm from '../../components/HeaderForm';
 import FooterForm from '../../components/FooterForm';
+import AppContext from '../../components/AppContext';
+import DadosFormService from '../../services/DadosFormService';
 
 class SubmitForm extends React.Component {
+    static contextType = AppContext;
+
     state = { user: null, error: null };
 
     constructor(props) {
@@ -22,10 +26,11 @@ class SubmitForm extends React.Component {
     }
 
     async handleSubmit(event) {
-        console.log('Um nome foi enviado: ' + JSON.stringify(this.state.value));
+        console.log('Um nome foi enviado: ' + JSON.stringify(this.context.formAluno.nome));
         event.preventDefault();
 
         try {
+            DadosFormService.createAluno(this.context.formAluno);
             let user = "User";
             this.setState({ user });
         } catch (error) {

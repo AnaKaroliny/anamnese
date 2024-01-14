@@ -33,9 +33,9 @@ const PrivateRoute = ({ children }) => {
     const authed = isAuthenticated() // isauth() returns true or false based on localStorage
     
     return authed ? children : <Navigate to="/" />;
-  }
+}
 
-function AllRoutes() {
+function GetUserSettings() {
     const [formAluno, setFormAluno] = useState({});
 
     function handleChange(event) {
@@ -51,8 +51,27 @@ function AllRoutes() {
         handleChange
     };
 
+    return userSettings
+}
+
+function AllRoutes() {
+    // const [formAluno, setFormAluno] = useState({ fieldName: '' });
+
+    // function handleChange(event) {
+    //     let fieldName = event.target.name;
+    //     let fieldValue = event.target.value;
+
+    //     setFormAluno({...formAluno, [fieldName]: fieldValue});
+    //     console.log(formAluno);
+    // }
+
+    // const userSettings = {
+    //     formAluno: formAluno,
+    //     handleChange
+    // };
+
     return (
-        <AppContext.Provider value={userSettings}>
+        <AppContext.Provider value={GetUserSettings()}>
             {/* Rota para github pages */}
             {/* <HashRouter basename={process.env.PUBLIC_URL}> */}
             <Router basename={process.env.PUBLIC_URL}>

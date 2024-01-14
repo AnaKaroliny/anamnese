@@ -37,12 +37,13 @@ function DadosPessoais() {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicSobrenome">
-                        <Form.Label>Data de nascimento</Form.Label>
+                        <Form.Label>Telefone</Form.Label>
                         <Form.Control
-                            name="dataNascimento"
-                            type="date"
+                            name="telefone"
+                            type="text"
+                            placeholder="(88) 99999-9999"
                             onChange={myContext.handleChange.bind(this)}
-                            value={formAluno.dataNascimento}
+                            value={formAluno.telefone}
                         />
                     </Form.Group>
 
@@ -63,19 +64,6 @@ function DadosPessoais() {
                                     placeholder="Estado"
                                     onChange={myContext.handleChange.bind(this)}
                                     value={formAluno.endEstado}
-                                />
-                            </Col>
-                        </Row>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicCep">
-                        <Row>
-                            <Col xs={8}>
-                                <Form.Control
-                                    name="endCep"
-                                    placeholder="CEP"
-                                    onChange={myContext.handleChange.bind(this)}
-                                    value={formAluno.endCep}
                                 />
                             </Col>
                         </Row>
