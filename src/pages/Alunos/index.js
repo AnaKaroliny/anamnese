@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDumbbell, faAddressCard, faCircleMinus, faFileMedical } from '@fortawesome/free-solid-svg-icons'
 
 import HeaderForm from '../../components/HeaderForm';
-import DadosFormService from '../../services/DadosFormService';
+import AlunosService from '../../services/AlunosService';
 
 class Forms extends React.Component {
     constructor(props) {
@@ -14,12 +14,17 @@ class Forms extends React.Component {
         this.state = {
             filter: 'new', // initial filter value
             searchQuery: '', // initial search query
-            data: ''
+            alunos: []
         };
     }
 
     componentDidMount() {
-        DadosFormService.getData('test', (dataReceived) => this.setState({data: dataReceived}))
+        AlunosService.getAlunos((alunos) => {
+            const alunosList = Object.entries(alunos).map(([id, item]) => {
+                return { id, nome: item.dadosPessoais.nome, isNew: item.dadosPessoais.isNew };
+            });
+            this.setState({ alunos: alunosList });
+        });
     }
 
     handleFilterChange = (event) => {
@@ -28,19 +33,14 @@ class Forms extends React.Component {
 
     handleSearchChange = (event) => {
         this.setState({ searchQuery: event.target.value });
+        
     }
 
-    render() {
-        const { filter, searchQuery, data } = this.state;
+    filterItems = () => {
+        const { filter, searchQuery, alunos } = this.state;
 
         // Filter the list items based on the filter value
-        const filteredItems = [
-            { id: 1, label: 'Sofia Oliveira', isNew: true },
-            { id: 2, label: 'Gabriel Santos', isNew: false },
-            { id: 3, label: 'Isabella Costa', isNew: true },
-            { id: 4, label: 'Lucas Pereira', isNew: false },
-            { id: 5, label: 'André Silva', isNew: true }
-        ].filter(item => {
+        const filteredAlunosAux = alunos.filter(item => {
             // Filter based on the selected filter value
             var isNew = false;
             if (filter === 'all') {
@@ -53,16 +53,20 @@ class Forms extends React.Component {
 
             // Filter based on the search query
             const searchRegex = new RegExp(searchQuery, 'i');
-            return isNew && searchRegex.test(item.label);
+            return isNew && searchRegex.test(item.nome);
         });
+
+        return filteredAlunosAux;
+    }
+
+    render() {
+        const { filter, searchQuery } = this.state;
+        var filteredAlunosAux = this.filterItems();
 
         return (
             <div>
                 <HeaderForm />
                 <Container>
-                    <div>
-                        <h1>{data}</h1>
-                    </div>
                     <div className="filter">
                         <label className="filter-select">
                             Selecione:
@@ -81,19 +85,19 @@ class Forms extends React.Component {
                         </Link>
                     </div>
                     <ListGroup>
-                        {filteredItems.map(item => (
-                            <ListGroup.Item>
+                        {filteredAlunosAux.map(item => (
+                            <ListGroup.Item key={item.id}>
                                 <div className="group-item">
-                                    {item.label}
+                                    {item.nome}
                                     <div className="group-item-buttons">
                                         {/* Ver informações pessoais do aluno */}
                                         <Link to={`/alunos`} key="info" className="item-button">
                                             <FontAwesomeIcon icon={faAddressCard} />
                                         </Link>
-                                        <Link to={`/aluno/${item.label}`} key="aluno" className="item-button">
+                                        <Link to={`/aluno/${item.nome}`} key="aluno" className="item-button">
                                             <FontAwesomeIcon icon={faFileMedical} />
                                         </Link>
-                                        <Link to={`/cadastroTreino/${item.label}`} key="treino" className="item-button">
+                                        <Link to={`/cadastroTreino/${item.nome}`} key="treino" className="item-button">
                                             <FontAwesomeIcon icon={faDumbbell} />
                                         </Link>
                                         {/* Excluir aluno */}

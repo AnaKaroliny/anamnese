@@ -17,7 +17,7 @@ function DadosPessoais() {
             <FormContainer>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicName">
-                        <Form.Label>Nome</Form.Label>
+                        <Form.Label>Nome Completo</Form.Label>
                         <Form.Control 
                             name="nome"
                             type="text"
@@ -25,7 +25,7 @@ function DadosPessoais() {
                             value={formAluno.nome}
                         />
                     </Form.Group>
-
+{/* 
                     <Form.Group className="mb-3" controlId="formBasicSobrenome">
                         <Form.Label>Sobrenome</Form.Label>
                         <Form.Control
@@ -34,7 +34,7 @@ function DadosPessoais() {
                             onChange={myContext.handleChange.bind(this)}
                             value={formAluno.sobrenome}
                         />
-                    </Form.Group>
+                    </Form.Group> */}
 
                     <Form.Group className="mb-3" controlId="formBasicSobrenome">
                         <Form.Label>Telefone</Form.Label>
