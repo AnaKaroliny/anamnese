@@ -11,7 +11,7 @@ export default function HeaderForm() {
             <HeaderContainer>
                 <Link to="/">
                     <ImageContainer>
-                        <img src={logo} width="70" height="70" className="logo" />
+                        <img src={logo} width="70" height="70" className="logo" alt="Logo Jean Treinador" />
                     </ImageContainer>
                 </Link>
                 <TitleContainer>

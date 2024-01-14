@@ -10,7 +10,7 @@ export default function navBottomButton({ numberPage, backPage, nextPage }) {
     return (
         <Container>
             <Footer>
-                <div class="footer">
+                <div className="footer">
                     {
                         backPage ?
                             <Link to={backPage}>
@@ -23,7 +23,7 @@ export default function navBottomButton({ numberPage, backPage, nextPage }) {
                                 <FaChevronLeft className="disabled"/>
                             </IconContext.Provider>
                     }
-                    <div class="container-numberPage">
+                    <div className="container-numberPage">
                         <label>
                             {numberPage + ' / 6'}
                         </label>

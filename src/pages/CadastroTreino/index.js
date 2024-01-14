@@ -13,15 +13,15 @@ class CadastroTreino extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            exercises: [
-                {
-                    exercise: '',
-                    sets: '',
-                    repetitions: '',
-                    restTime: '',
-                    observations: ''
-                }
-            ],
+            // exercises: [
+            //     {
+            //         exercise: '',
+            //         sets: '',
+            //         repetitions: '',
+            //         restTime: '',
+            //         observations: ''
+            //     }
+            // ],
             daysWeek: [
                 'Segunda-feira',
                 'Terça-feira',
@@ -152,7 +152,7 @@ class CadastroTreino extends React.Component {
       };
 
     render() {
-        const { exercises, daysWeek, exercisesPerDay } = this.state;
+        const { daysWeek, exercisesPerDay } = this.state;
         return (
             <div>
                 <HeaderForm />

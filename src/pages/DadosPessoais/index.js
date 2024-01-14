@@ -47,42 +47,38 @@ function DadosPessoais() {
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicEndereco">
-                        <Form>
-                            <Row>
-                                <Form.Label>Endereço</Form.Label>
-                                <Col xs={8}>
-                                    <Form.Control
-                                        name="endCidade"
-                                        placeholder="Cidade"
-                                        onChange={myContext.handleChange.bind(this)}
-                                        value={formAluno.endCidade}
-                                    />
-                                </Col>
-                                <Col>
-                                    <Form.Control
-                                        name="endEstado"
-                                        placeholder="Estado"
-                                        onChange={myContext.handleChange.bind(this)}
-                                        value={formAluno.endEstado}
-                                    />
-                                </Col>
-                            </Row>
-                        </Form>
+                        <Row>
+                            <Form.Label>Endereço</Form.Label>
+                            <Col xs={8}>
+                                <Form.Control
+                                    name="endCidade"
+                                    placeholder="Cidade"
+                                    onChange={myContext.handleChange.bind(this)}
+                                    value={formAluno.endCidade}
+                                />
+                            </Col>
+                            <Col>
+                                <Form.Control
+                                    name="endEstado"
+                                    placeholder="Estado"
+                                    onChange={myContext.handleChange.bind(this)}
+                                    value={formAluno.endEstado}
+                                />
+                            </Col>
+                        </Row>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formBasicCep">
-                        <Form>
-                            <Row>
-                                <Col xs={8}>
-                                    <Form.Control
-                                        name="endCep"
-                                        placeholder="CEP"
-                                        onChange={myContext.handleChange.bind(this)}
-                                        value={formAluno.endCep}
-                                    />
-                                </Col>
-                            </Row>
-                        </Form>
+                        <Row>
+                            <Col xs={8}>
+                                <Form.Control
+                                    name="endCep"
+                                    placeholder="CEP"
+                                    onChange={myContext.handleChange.bind(this)}
+                                    value={formAluno.endCep}
+                                />
+                            </Col>
+                        </Row>
                     </Form.Group>
                 </Form>
             </FormContainer>

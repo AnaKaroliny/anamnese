@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Row, Col, label2} from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { FormContainer } from './styles';
 import HeaderForm from '../../components/HeaderForm';
