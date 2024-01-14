@@ -89,4 +89,20 @@ export const Container = styled.div`
             }
         }
     }
+
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+    
+    .pagination a {
+        color: #007bff;
+        cursor: pointer;
+        margin: 0 5px;
+    }
+    
+    .pagination .active a {
+        font-weight: bold;
+    }
 `;

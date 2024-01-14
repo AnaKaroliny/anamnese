@@ -7,14 +7,18 @@ import { faDumbbell, faAddressCard, faCircleMinus, faFileMedical } from '@fortaw
 
 import HeaderForm from '../../components/HeaderForm';
 import AlunosService from '../../services/AlunosService';
+import ReactPaginate from 'react-paginate';
 
 class Forms extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: 'new', // initial filter value
-            searchQuery: '', // initial search query
-            alunos: []
+            filter: 'new',
+            searchQuery: '',
+            alunos: [],
+            offset: 0, // offset inicial para a paginação
+            perPage: 5, // quantidade de itens por página
+            currentPage: 0, // página atual
         };
     }
 
@@ -33,11 +37,20 @@ class Forms extends React.Component {
 
     handleSearchChange = (event) => {
         this.setState({ searchQuery: event.target.value });
-        
     }
 
+    handlePageClick = (data) => {
+        const selectedPage = data.selected;
+        const offset = selectedPage * this.state.perPage;
+    
+        this.setState({
+            currentPage: selectedPage,
+            offset: offset,
+        });
+    };
+
     filterItems = () => {
-        const { filter, searchQuery, alunos } = this.state;
+        const { filter, searchQuery, alunos, offset, perPage } = this.state;
 
         // Filter the list items based on the filter value
         const filteredAlunosAux = alunos.filter(item => {
@@ -56,11 +69,14 @@ class Forms extends React.Component {
             return isNew && searchRegex.test(item.nome);
         });
 
-        return filteredAlunosAux;
+        // Calcular a página atual de alunos com base no offset e na quantidade de itens por página
+        const currentPageAlunos = filteredAlunosAux.slice(offset, offset + perPage);
+
+        return currentPageAlunos;
     }
 
     render() {
-        const { filter, searchQuery } = this.state;
+        const { filter, searchQuery, perPage, alunos } = this.state;
         var filteredAlunosAux = this.filterItems();
 
         return (
@@ -109,6 +125,18 @@ class Forms extends React.Component {
                             </ListGroup.Item>
                         ))}
                     </ListGroup>
+                    <ReactPaginate
+                        previousLabel={'Anterior'}
+                        nextLabel={'Próximo'}
+                        breakLabel={'...'}
+                        breakClassName={'break-me'}
+                        pageCount={Math.ceil(searchQuery ? filteredAlunosAux.length : alunos.length / perPage)}
+                        marginPagesDisplayed={2}
+                        pageRangeDisplayed={5}
+                        onPageChange={this.handlePageClick}
+                        containerClassName={'pagination'}
+                        activeClassName={'active'}
+                    />
                 </Container>
             </div>
         );
