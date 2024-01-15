@@ -17,7 +17,7 @@ class Forms extends React.Component {
             searchQuery: '',
             alunos: [],
             offset: 0, // offset inicial para a paginação
-            perPage: 5, // quantidade de itens por página
+            perPage: 20, // quantidade de itens por página
             currentPage: 0, // página atual
         };
     }
@@ -69,15 +69,24 @@ class Forms extends React.Component {
             return isNew && searchRegex.test(item.nome);
         });
 
+        var numAlunos = filteredAlunosAux.length;
+        var numPages = Math.ceil(numAlunos / perPage);
+        if (numPages === 0) {
+            numPages = 1;
+        }
+
         // Calcular a página atual de alunos com base no offset e na quantidade de itens por página
         const currentPageAlunos = filteredAlunosAux.slice(offset, offset + perPage);
 
-        return currentPageAlunos;
+        return {
+            currentPageAlunos,
+            numPages
+        };
     }
 
     render() {
-        const { filter, searchQuery, perPage, alunos } = this.state;
-        var filteredAlunosAux = this.filterItems();
+        const { filter, searchQuery, perPage } = this.state;
+        var filterObject = this.filterItems();
 
         return (
             <div>
@@ -101,7 +110,7 @@ class Forms extends React.Component {
                         </Link>
                     </div>
                     <ListGroup>
-                        {filteredAlunosAux.map(item => (
+                        {filterObject.currentPageAlunos.map(item => (
                             <ListGroup.Item key={item.id}>
                                 <div className="group-item">
                                     {item.nome}
@@ -130,7 +139,7 @@ class Forms extends React.Component {
                         nextLabel={'Próximo'}
                         breakLabel={'...'}
                         breakClassName={'break-me'}
-                        pageCount={Math.ceil(searchQuery ? filteredAlunosAux.length : alunos.length / perPage)}
+                        pageCount={filterObject.numPages}
                         marginPagesDisplayed={2}
                         pageRangeDisplayed={5}
                         onPageChange={this.handlePageClick}

@@ -96,13 +96,32 @@ export const Container = styled.div`
         margin-top: 20px;
     }
     
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        padding-bottom: 40px;
+    }
+    
     .pagination a {
-        color: #007bff;
+        color: ${colors.primary};
         cursor: pointer;
         margin: 0 5px;
+        padding: 5px 10px;
+        border: 1px solid ${colors.primary};
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        text-decoration: none; /* Adicionado para remover a linha abaixo do link */
+    }
+    
+    .pagination a:hover {
+        background-color: ${colors.primary};
+        color: #fff;
     }
     
     .pagination .active a {
         font-weight: bold;
+        background-color: ${colors.primary};
+        color: #fff;
     }
 `;
