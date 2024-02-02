@@ -1,8 +1,9 @@
 import React from 'react';
-import { Container, Table, Button, TableRow, TableCell, Input, Select, Option } from './styles';
+import { Container, Table, Button, TableRow, TableCell, Input, Select, Option, Title } from './styles';
 import { useParams } from 'react-router-dom';
 
 import HeaderForm from '../../components/HeaderForm';
+import ExercicioService from '../../services/ExercicioService';
 
 function ProfileName() {
     let { name } = useParams();
@@ -95,7 +96,8 @@ class CadastroTreino extends React.Component {
                         observations: ''
                     }
                 ]
-            }
+            },
+            exercicios: [],
         };
     }
 
@@ -125,6 +127,13 @@ class CadastroTreino extends React.Component {
     //     this.setState({ exercises });
     // };
 
+    componentDidMount() {
+        ExercicioService.getExercicios((exercicios) => {
+            const exercicioAux = Object.values(exercicios);
+            this.setState({ exercicios: exercicioAux });
+        });
+    }
+
     handleInputChange = (day, index, event) => {
         const { name, value } = event.target;
         const exercisesPerDay = { ...this.state.exercisesPerDay };
@@ -152,31 +161,49 @@ class CadastroTreino extends React.Component {
       };
 
     render() {
-        const { daysWeek, exercisesPerDay } = this.state;
+        const { daysWeek, exercisesPerDay, exercicios } = this.state;
+
+        // Agrupar exercícios por músculo
+        const exerciciosPorMusculo = {};
+
+        for (const musculoId in exercicios) {
+            if (exercicios.hasOwnProperty(musculoId)) {
+                const { label: musculo, ...exerciciosDoMusculo } = exercicios[musculoId];
+
+                exerciciosPorMusculo[musculo] = Object.values(exerciciosDoMusculo);
+            }
+        }
+
         return (
             <div>
                 <HeaderForm />
                 <Container>
                     <ProfileName />
                     {Object.keys(exercisesPerDay).map((day, dayIndex) => (
-                        <Table key={dayIndex}>
-                            <h5>{daysWeek[dayIndex]}</h5>
+                        <Table key={dayIndex} >
+                            <caption>{daysWeek[dayIndex]}</caption>
                             <tbody>
                                 {exercisesPerDay[day].map((exercise, index) => (
                                 <TableRow key={index}>
                                     <TableCell>
-                                        <TableCell>Exercício</TableCell>
+                                        <Title>Exercício</Title>
                                         <Select
                                             name="exercise"
                                             value={exercise.exercise}
                                             onChange={(event) => this.handleInputChange(day, index, event)}
                                         >
                                             <Option value="">Selecione</Option>
-                                            {/* Adicione as opções de exercícios aqui */}
+                                            {Object.keys(exerciciosPorMusculo).map((musculo) => (
+                                                <optgroup key={musculo} label={musculo}>
+                                                    {exerciciosPorMusculo[musculo].map((exercicio, i) => (
+                                                        <option key={i} value={exercicio}>{exercicio.label}</option>
+                                                    ))}
+                                                </optgroup>
+                                            ))}
                                         </Select>
                                     </TableCell>
                                     <TableCell>
-                                        <TableCell>Séries</TableCell>
+                                        <Title>Séries</Title>
                                         <Select
                                             name="sets"
                                             value={exercise.sets}
@@ -187,7 +214,7 @@ class CadastroTreino extends React.Component {
                                     </Select>
                                     </TableCell>
                                     <TableCell>
-                                        <TableCell>Repetições</TableCell>
+                                        <Title>Repetições</Title>
                                         <Input
                                             type="text"
                                             name="repetitions"
@@ -196,7 +223,7 @@ class CadastroTreino extends React.Component {
                                         />
                                     </TableCell>
                                     <TableCell>
-                                        <TableCell>Tempo de Descanso</TableCell>
+                                        <Title>Tempo de Descanso</Title>
                                         <Select
                                             name="restTime"
                                             value={exercise.restTime}
@@ -206,7 +233,7 @@ class CadastroTreino extends React.Component {
                                         </Select>
                                     </TableCell>
                                     <TableCell>
-                                        <TableCell>Observações</TableCell>
+                                        <Title>Observações</Title>
                                         <Input
                                             type="text"
                                             name="observations"

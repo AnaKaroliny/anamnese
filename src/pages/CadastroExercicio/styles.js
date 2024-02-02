@@ -24,6 +24,11 @@ export const Container = styled.div`
         padding: 10px;
         border: 1px solid ${colors.lightBackground};
         border-radius: 5px;
+
+        &:focus {
+            border-color: ${colors.primary};
+            outline: none;
+        }
     }
 
     button[type="submit"] {
@@ -68,5 +73,11 @@ export const Container = styled.div`
         button {
             flex: 1;
         }
+    }
+
+    .musculo {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
     }
 `;

@@ -7,7 +7,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
 
-    h5 {
+    caption {
         margin: 10px;
         font-size: 18px;
         font-weight: bold;
@@ -34,6 +34,13 @@ export const TableRow = styled.tr`
 `;
 
 export const TableCell = styled.td`
+    flex: 1;
+    padding-bottom: 10px;
+    width: 100%;
+    margin-right: 10px;
+`;
+
+export const Title = styled.h6`
     flex: 1;
     padding-bottom: 10px;
     width: 100%;

@@ -2,40 +2,63 @@ import React from 'react';
 import { Container } from './styles';
 
 import HeaderForm from '../../components/HeaderForm';
+import ExercicioService from '../../services/ExercicioService';
 
 class CadastroExercicio extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            muscle: '',
-            exerciseName: '',
-            exercises: [] // Array para armazenar os exercícios cadastrados
+            musculo: '',
+            exercicioNome: '',
+            exercicios: [], // Array para armazenar os exercícios cadastrados
+            musculos: [],
         };
     }
 
-    handleMuscleChange = (event) => {
-        this.setState({ muscle: event.target.value });
+    componentDidMount() {
+        ExercicioService.getMusculos((musculos) => {
+            this.setState({ musculos });
+        });
+
+        ExercicioService.getExercicios((exercicios) => {
+            const exercicioAux = Object.values(exercicios);
+            this.setState({ exercicios: exercicioAux });
+        });
     }
 
-    handleExerciseNameChange = (event) => {
-        this.setState({ exerciseName: event.target.value });
+    handleMusculoChange = (event) => {
+        if (event.target.value) {
+            this.setState({ musculo: event.target.value.label });
+
+            var musculoObj = JSON.parse(event.target.value);
+            this.setState({ musculoObj });
+        }
+    }
+
+    handleExercicioNomeChange = (event) => {
+        this.setState({ exercicioNome: event.target.value });
     }
 
     handleSubmit = (event) => {
         event.preventDefault();
-        // Adicionar o novo exercício ao array de exercícios
-        const newExercise = {
-            muscle: this.state.muscle,
-            exerciseName: this.state.exerciseName
-        };
-        this.setState(prevState => ({
-            exercises: [...prevState.exercises, newExercise],
-            muscle: '',
-            exerciseName: ''
-        }));
+        const { exercicioNome, musculoObj } = this.state;
+        ExercicioService.setExercicio(exercicioNome, musculoObj.label, musculoObj.id);
     }
 
     render() {
+        const { exercicios } = this.state;
+
+        // Agrupar exercícios por músculo
+        const exerciciosPorMusculo = {};
+
+        for (const musculoId in exercicios) {
+            if (exercicios.hasOwnProperty(musculoId)) {
+                const { label: musculo, ...exerciciosDoMusculo } = exercicios[musculoId];
+
+                exerciciosPorMusculo[musculo] = Object.values(exerciciosDoMusculo);
+            }
+        }
+
         return (
             <div>
                 <HeaderForm />
@@ -43,47 +66,18 @@ class CadastroExercicio extends React.Component {
                     <form onSubmit={this.handleSubmit}>
                         <div>
                             {/* Adicionar os valores no banco de dados */}
-                            <label htmlFor="muscle">Músculo:</label>
-                            <select id="muscle" value={this.state.muscle} onChange={this.handleMuscleChange}>
+                            <label htmlFor="musculo">Músculo:</label>
+                            <select id="musculo" value={this.state.musculo} onChange={this.handleMusculoChange}>
                                 <option value="">Selecione um músculo</option>
-                                <optgroup label="Músculos do peito">
-                                    <option value="peitorais maior">Peitorais maior</option>
-                                    <option value="peitorais menor">Peitorais menor</option>
-                                </optgroup>
-                                <optgroup label="Músculos das costas">
-                                    <option value="latíssimo do dorso">Latíssimo do dorso</option>
-                                    <option value="trapézio">Trapézio</option>
-                                    <option value="romboides">Romboides</option>
-                                </optgroup>
-                                <optgroup label="Músculos dos ombros">
-                                    <option value="deltoides">Deltoides</option>
-                                </optgroup>
-                                <optgroup label="Músculos dos braços">
-                                    <option value="bíceps">Bíceps</option>
-                                    <option value="tríceps">Tríceps</option>
-                                    <option value="antebraços">Antebraços</option>
-                                </optgroup>
-                                <optgroup label="Músculos das pernas">
-                                    <option value="quadríceps">Quadríceps</option>
-                                    <option value="isquiotibiais">Isquiotibiais</option>
-                                    <option value="glúteos">Glúteos</option>
-                                    <option value="panturrilhas">Panturrilhas</option>
-                                </optgroup>
-                                <optgroup label="Músculos do abdômen">
-                                    <option value="reto abdominal">Reto abdominal</option>
-                                    <option value="oblíquos">Oblíquos</option>
-                                    <option value="transverso">Transverso</option>
-                                </optgroup>
-                                <optgroup label="Músculos do pescoço">
-                                    <option value="trapézio">Trapézio</option>
-                                    <option value="esternocleidomastóideo">Esternocleidomastóideo</option>
-                                </optgroup>
+                                {this.state.musculos && this.state.musculos.map((musculo, index) => (
+                                    <option key={index} value={JSON.stringify(musculo)}>{musculo.label}</option>
+                                ))}
                             </select>
                         </div>
                         <div className="input-group">
                             <div className="input-block">
-                                <label htmlFor="exerciseName">Nome do exercício:</label>
-                                <input type="text" id="exerciseName" value={this.state.exerciseName} onChange={this.handleExerciseNameChange} />
+                                <label htmlFor="exercicioNome">Nome do exercício:</label>
+                                <input type="text" id="exercicioNome" value={this.state.exercicioNome} onChange={this.handleExercicioNomeChange} />
                             </div>
                             <button type="submit">Cadastrar</button>
                         </div>
@@ -96,11 +90,17 @@ class CadastroExercicio extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.state.exercises.map((exercise, index) => (
-                                <tr key={index}>
-                                    <td>{exercise.muscle}</td>
-                                    <td>{exercise.exerciseName}</td>
-                                </tr>
+                            {Object.keys(exerciciosPorMusculo).map((musculo, index) => (
+                                <React.Fragment key={index}>
+                                    <tr>
+                                        <td colSpan="2" className="musculo">{musculo}</td>
+                                    </tr>
+                                    {exerciciosPorMusculo[musculo].map((exercicio, index) => (
+                                        <tr key={index}>
+                                            <td colSpan="2">{exercicio.label}</td>
+                                        </tr>
+                                    ))}
+                                </React.Fragment>
                             ))}
                         </tbody>
                     </table>
