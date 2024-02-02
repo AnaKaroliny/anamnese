@@ -64,8 +64,8 @@ export const Input = styled.input`
     border-radius: 5px;
 
     &:focus {
-    outline: none;
-    border-color: ${colors.primary};
+        outline: none;
+        border-color: ${colors.primary};
     }
 `;
 
@@ -76,6 +76,7 @@ export const Select = styled.select`
 
      &:focus {
         border: 1px solid ${colors.primary};
+        outline: none;
     }
 `;
 
