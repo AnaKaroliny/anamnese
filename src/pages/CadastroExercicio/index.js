@@ -85,8 +85,7 @@ class CadastroExercicio extends React.Component {
                     <table>
                         <thead>
                             <tr>
-                                <th>Músculo</th>
-                                <th>Nome do exercício</th>
+                                <th>Exercícios</th>
                             </tr>
                         </thead>
                         <tbody>
