@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDumbbell, faAddressCard, faCircleMinus, faFileMedical } from '@fortawesome/free-solid-svg-icons'
 
 import HeaderForm from '../../components/HeaderForm';
-import AlunosService from '../../services/AlunosService';
+import AlunoService from '../../services/AlunoService';
 import ReactPaginate from 'react-paginate';
 
 class Forms extends React.Component {
@@ -23,7 +23,7 @@ class Forms extends React.Component {
     }
 
     componentDidMount() {
-        AlunosService.getAlunos((alunos) => {
+        AlunoService.getAlunos((alunos) => {
             const alunosList = Object.entries(alunos).map(([id, item]) => {
                 return { id, nome: item.dadosPessoais.nome, isNew: item.dadosPessoais.isNew };
             });
@@ -85,7 +85,7 @@ class Forms extends React.Component {
     }
 
     render() {
-        const { filter, searchQuery, perPage } = this.state;
+        const { filter, searchQuery } = this.state;
         var filterObject = this.filterItems();
 
         return (
@@ -116,7 +116,7 @@ class Forms extends React.Component {
                                     {item.nome}
                                     <div className="group-item-buttons">
                                         {/* Ver informações pessoais do aluno */}
-                                        <Link to={`/alunos`} key="info" className="item-button">
+                                        <Link to={`/aluno/${item.id}/dadosPessoais`} key="info" className="item-button">
                                             <FontAwesomeIcon icon={faAddressCard} />
                                         </Link>
                                         <Link to={`/aluno/${item.nome}`} key="aluno" className="item-button">

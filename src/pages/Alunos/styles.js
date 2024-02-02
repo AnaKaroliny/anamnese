@@ -13,6 +13,17 @@ export const Container = styled.div`
 
         .filter-select {
             flex: 1;
+
+            select {
+                width: 60%;
+                height: 30px;
+                border: 1px solid;
+                border-radius: 5px;
+                padding: 5px;
+                font-size: 15px;
+                color: ${colors.darkGrayText};
+                font-weight: 500;
+            }
         }
 
         .filter-search {

@@ -22,6 +22,7 @@ import Alunos from "../pages/Alunos";
 import Aluno from "../pages/Aluno";
 import CadastroExercicio from "../pages/CadastroExercicio";
 import CadastroTreino from "../pages/CadastroTreino";
+import AlunoDadosPessoais from "../pages/AlunoDadosPessoais";
 
 import Login from "../pages/Login";
 
@@ -94,6 +95,7 @@ function AllRoutes() {
                         {/* Admin routes */}
                         <Route path="/alunos" element={<PrivateRoute><Alunos /></PrivateRoute>} />
                         <Route path="/aluno/:name" element={<PrivateRoute><Aluno /></PrivateRoute>} />
+                        <Route path="/aluno/:id/dadosPessoais" element={<PrivateRoute><AlunoDadosPessoais /></PrivateRoute>} />
                         <Route path="/cadastroExercicio" element={<PrivateRoute><CadastroExercicio /></PrivateRoute>} />
                         <Route path="/cadastroTreino/:name" element={<PrivateRoute><CadastroTreino /></PrivateRoute>} />
                     </Routes>
