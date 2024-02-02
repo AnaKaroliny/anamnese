@@ -46,3 +46,17 @@ export const TitleContainer = styled.div`
         font-weight: unset;
     }
 `;
+
+export const GoBackButton = styled.button`
+    background-color: ${colors.white};
+    color: ${colors.lightText};
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 22px;
+    cursor: pointer;
+
+    &:hover {
+        color: ${colors.primary};
+    }
+`;

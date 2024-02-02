@@ -35,10 +35,16 @@ export const Label = styled.label`
 `;
 
 export const Input = styled.input`
-    padding: 10px;
-    border: 1px solid ${colors.gray};
-    border-radius: 4px;
     width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    &:focus {
+    outline: none;
+    border-color: ${colors.primary};
+    }
 `;
 
 export const Button = styled.button`

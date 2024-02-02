@@ -90,7 +90,7 @@ class Forms extends React.Component {
 
         return (
             <div>
-                <HeaderForm />
+                <HeaderForm noGoBack={true}/>
                 <Container>
                     <div className="filter">
                         <label className="filter-select">

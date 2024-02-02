@@ -50,12 +50,15 @@ export const Button = styled.button`
 `;
 
 export const Input = styled.input`
-    margin-bottom: 5px;
-    padding: 5px;
     width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 
     &:focus {
-        border: 1px solid ${colors.primary};
+    outline: none;
+    border-color: ${colors.primary};
     }
 `;
 

@@ -6,7 +6,7 @@ import HeaderForm from '../../components/HeaderForm';
 function Login() {
     return (
         <div>
-            <HeaderForm />
+            <HeaderForm noGoBack={true} />
             <Container>
                 <Form>
                     <Input type="text" placeholder="Usuário" />
