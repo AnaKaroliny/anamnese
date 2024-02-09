@@ -60,3 +60,9 @@ export const GoBackButton = styled.button`
         color: ${colors.primary};
     }
 `;
+
+export const Title = styled.h1`
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 20px;
+`;

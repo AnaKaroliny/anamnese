@@ -4,18 +4,12 @@ import { useParams } from 'react-router-dom';
 
 import HeaderForm from '../../components/HeaderForm';
 
-function ProfileName() {
-    let { name } = useParams();
-    return name;
-}
-
 class Aluno extends React.Component {
     render() {
         return (
             <div>
-                <HeaderForm />
+                <HeaderForm title={"Formulário de medidas: " + this.props.params.name} />
                 <Container>
-                    <Title>Formulário de medidas de <ProfileName /></Title>
                     <Form>
                         <div className="form-group">
                             <FormGroup>
@@ -95,4 +89,9 @@ class Aluno extends React.Component {
     }
 }
 
-export default Aluno;
+export default (props) => (
+    <Aluno
+        {...props}
+        params={useParams()}
+    />
+);

@@ -32,9 +32,8 @@ class AlunoDadosPessoais extends React.Component {
 
         return (
             <div>
-                <HeaderForm />
+                <HeaderForm title={"Informações Pessoais: " + dadosPessoais.nome} />
                 <Container>
-                    <Title>Informações Pessoais de {dadosPessoais.nome} </Title>
                     <Form>
                         <Row>
                             <Col sm={6}>

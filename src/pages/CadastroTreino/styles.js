@@ -4,14 +4,40 @@ import colors from '../../styles/colors';
 export const Container = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    height: 70vh;
+    padding: 40px;
 
     caption {
         margin: 10px;
         font-size: 18px;
         font-weight: bold;
         color: ${colors.primary};
+    }
+
+    .tabs {
+        display: flex;
+        margin-bottom: 50px;
+
+        button {
+            margin-right: 10px;
+            padding: 10px;
+            border: none;
+            background-color: #f2f2f2;
+            cursor: pointer;
+        }
+    }
+
+    .tab {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .tab.active {
+        background-color: ${colors.darkPrimary};
+        color: #fff;
     }
 `;
 
@@ -78,6 +104,12 @@ export const Select = styled.select`
         border: 1px solid ${colors.primary};
         outline: none;
     }
+`;
+
+export const TitleHeader = styled.h1`
+    text-align: center;
+    font-size: 20px;
+    padding-bottom: 50px;
 `;
 
 export const Option = styled.option``;

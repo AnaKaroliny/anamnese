@@ -125,10 +125,6 @@ class Forms extends React.Component {
                                         <Link to={`/cadastroTreino/${item.nome}`} key="treino" className="item-button">
                                             <FontAwesomeIcon icon={faDumbbell} />
                                         </Link>
-                                        {/* Excluir aluno */}
-                                        <Link to={`/alunos`} key="excluir" className="item-button">
-                                            <FontAwesomeIcon icon={faCircleMinus} />
-                                        </Link>
                                     </div>
                                 </div>
                             </ListGroup.Item>
