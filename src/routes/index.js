@@ -94,10 +94,10 @@ function AllRoutes() {
 
                         {/* Admin routes */}
                         <Route path="/alunos" element={<PrivateRoute><Alunos /></PrivateRoute>} />
-                        <Route path="/aluno/:name" element={<PrivateRoute><Aluno /></PrivateRoute>} />
+                        <Route path="/aluno/:id" element={<PrivateRoute><Aluno /></PrivateRoute>} />
                         <Route path="/aluno/:id/dadosPessoais" element={<PrivateRoute><AlunoDadosPessoais /></PrivateRoute>} />
                         <Route path="/cadastroExercicio" element={<PrivateRoute><CadastroExercicio /></PrivateRoute>} />
-                        <Route path="/cadastroTreino/:name" element={<PrivateRoute><CadastroTreino /></PrivateRoute>} />
+                        <Route path="/cadastroTreino/:id" element={<PrivateRoute><CadastroTreino /></PrivateRoute>} />
                     </Routes>
                 </div>
             </Router>

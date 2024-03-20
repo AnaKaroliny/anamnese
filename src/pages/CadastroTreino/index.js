@@ -4,11 +4,14 @@ import { useParams } from 'react-router-dom';
 
 import HeaderForm from '../../components/HeaderForm';
 import ExercicioService from '../../services/ExercicioService';
+import AlunoService from '../../services/AlunoService';
+import AlunosService from '../../services/AlunoService';
 
 class CadastroTreino extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            nomeAluno: '',
             diasDaSemana: [
                 { label: 'Segunda', value: 'segunda' },
                 { label: 'Terça', value: 'terça' },
@@ -19,50 +22,107 @@ class CadastroTreino extends React.Component {
                 { label: 'Domingo', value: 'domingo'}
             ],
             exercicios: [],
-            exerciciosPorDia: [{
-                muscle: '',
-                exercise: '',
-                sets: '',
-                repetitions: '',
-                restTime: '',
-                observations: ''
-            }],
+            series: [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            repeticoes: [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                30,
+                40,
+                50,
+                100
+            ],
+            descanso: [
+                "30 segundos",
+                "1 a 3 minutos",
+                "3 a 5 minutos"
+            ],
+            exerciciosPorDia: {
+                musculo: '',
+                exercicio: '',
+                series: '',
+                repeticoes: '',
+                descanso: '',
+                observacao: ''
+            },
+            treinos: [],
             activeTab: 'segunda' // Tab ativa inicialmente
         };
     }
 
     componentDidMount() {
+        AlunoService.getAluno(this.props.params.id, (aluno) => {
+            this.setState({ nomeAluno: aluno.dadosPessoais.nome });
+        });
+
         ExercicioService.getExercicios((exercicios) => {
             const exercicioAux = Object.values(exercicios);
             this.setState({ exercicios: exercicioAux });
         });
+
+        AlunoService.getTreinos(this.props.params.id, this.state.activeTab, (treinos) => {
+            if (treinos) {
+                const treinosAux = Object.values(treinos);
+                this.setState({ treinos: treinosAux });
+            }
+        });
     }
 
-    handleInputChange = (index, event) => {
-        const { name, value } = event.target;
+    handleInputChange = (event) => {
+        const { name, value, options, selectedIndex} = event.target;
         const { exerciciosPorDia } = this.state;
-        exerciciosPorDia[index][name] = value;
+
+        if (name === 'exercicio') {
+            const musculo = options[selectedIndex].dataset.musculo;
+            exerciciosPorDia.musculo = musculo;
+        }
+
+        exerciciosPorDia[name] = value;
         this.setState({ exerciciosPorDia });
     };
 
-    handleAddExercise = () => {
-        const { exerciciosPorDia } = this.state;
-        exerciciosPorDia.push({
-            muscle: '',
-            exercise: '',
-            sets: '',
-            repetitions: '',
-            restTime: '',
-            observations: ''
+    handleAddexercicio = () => {
+        const { exerciciosPorDia, activeTab } = this.state;
+
+        AlunoService.updateTreinos(this.props.params.id, exerciciosPorDia, activeTab);
+
+        this.setState({ 
+            exerciciosPorDia: {
+                musculo: '',
+                exercicio: '',
+                series: '',
+                repeticoes: '',
+                descanso: '',
+                observacao: ''
+            }
         });
-        this.setState({ exerciciosPorDia });
     };
 
-    handleRemoveExercise = (index) => {
-        const { exerciciosPorDia } = this.state;
-        exerciciosPorDia.splice(index, 1);
-
-        this.setState({ exerciciosPorDia });
+    handleRemoverExercicio = (treinoId) => {
+        AlunosService.removerExercicioDoTreino(this.props.params.id, this.state.activeTab, treinoId);
     };
 
     handleTabClick = (day) => {
@@ -70,7 +130,7 @@ class CadastroTreino extends React.Component {
     };
 
     render() {
-        const { diasDaSemana, exerciciosPorDia, exercicios, activeTab } = this.state;
+        const { nomeAluno, diasDaSemana, exerciciosPorDia, exercicios, activeTab, series, repeticoes, descanso, treinos } = this.state;
 
         // Agrupar exercícios por músculo
         const exerciciosPorMusculo = {};
@@ -85,7 +145,7 @@ class CadastroTreino extends React.Component {
 
         return (
             <div>
-                <HeaderForm title={'Cadastro de Treino: ' + this.props.params.name}/>
+                <HeaderForm title={'Cadastro de Treino: ' + nomeAluno}/>
                 <Container>
                     <div className="tabs">
                         {diasDaSemana.map((day, index) => (
@@ -99,19 +159,63 @@ class CadastroTreino extends React.Component {
                         ))}
                     </div>
                     <div className="tab-content">
-                        {Object.keys(exerciciosPorDia).map((exercise, index) => (
-                            <Table
-                                key={index}
-                            >
-                                <tbody>
+                        <div>
+                            {/* <Title>Lista de treinos</Title> */}
+                            <Table>
+                            <thead>
+                                <TableRow>
+                                <TableCell>
+                                    <Title>Músculo + Exercício</Title>
+                                </TableCell>
+                                <TableCell>
+                                    <Title>Séries</Title>
+                                </TableCell>
+                                <TableCell>
+                                    <Title>Repetições</Title>
+                                </TableCell>
+                                <TableCell>
+                                    <Title>Descanso</Title>
+                                </TableCell>
+                                <TableCell>
+                                    <Title>Observações</Title>
+                                </TableCell>
+                                <TableCell>
+                                    <Title>Remover</Title>
+                                </TableCell>
+                                </TableRow>
+                            </thead>
+                            <tbody>
+                                {treinos.map((treino, index) => (
                                     <TableRow key={index}>
+                                        <TableCell>{treino.musculo + ' - ' + treino.exercicio}</TableCell>
+                                        <TableCell>{treino.series}</TableCell>
+                                        <TableCell>{treino.repeticoes}</TableCell>
+                                        <TableCell>{treino.descanso}</TableCell>
+                                        <TableCell>{treino.observacao}</TableCell>
                                         <TableCell>
-                                            <Title>Exercício {index + 1}:</Title>
+                                            <Button
+                                                onClick={() =>
+                                                    this.handleRemoverExercicio(treino.id)
+                                                }
+                                            >
+                                                x
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </tbody>
+                            </Table>
+                        </div>
+                            <Table>
+                                <tbody>
+                                    <TableRow>
+                                        <TableCell>
+                                            <Title>Exercício:</Title>
                                             <Select
-                                                name="exercise"
-                                                value={exercise.exercise}
+                                                name="exercicio"
+                                                value={exerciciosPorDia.exercicio}
                                                 onChange={(event) =>
-                                                    this.handleInputChange(index, event)
+                                                    this.handleInputChange(event)
                                                 }
                                             >
                                                 <Option value="">Selecione</Option>
@@ -121,7 +225,8 @@ class CadastroTreino extends React.Component {
                                                             (exercicio, i) => (
                                                                 <option
                                                                     key={i}
-                                                                    value={exercicio}
+                                                                    value={exercicio.label}
+                                                                    data-musculo={musculo}
                                                                 >
                                                                     {exercicio.label}
                                                                 </option>
@@ -134,74 +239,92 @@ class CadastroTreino extends React.Component {
                                         <TableCell>
                                             <Title>Séries</Title>
                                             <Select
-                                                name="sets"
-                                                value={exercise.sets}
+                                                name="series"
+                                                value={exerciciosPorDia.series}
                                                 onChange={(event) =>
-                                                    this.handleInputChange(index, event)
+                                                    this.handleInputChange(event)
                                                 }
                                             >
                                                 <Option value="">Selecione</Option>
-                                                {/* Adicione as opções de séries aqui */}
+                                                {series.map(
+                                                    (set, i) => (
+                                                        <option
+                                                            key={i}
+                                                            value={set}
+                                                        >
+                                                            {set}
+                                                        </option>
+                                                    )
+                                                )}
                                             </Select>
                                         </TableCell>
                                         <TableCell>
                                             <Title>Repetições</Title>
-                                            <Input
-                                                type="text"
-                                                name="repetitions"
-                                                value={exercise.repetitions}
+                                            <Select
+                                                name="repeticoes"
+                                                value={exerciciosPorDia.repeticoes}
                                                 onChange={(event) =>
-                                                    this.handleInputChange(index, event)
+                                                    this.handleInputChange(event)
                                                 }
-                                            />
+                                            >
+                                                <Option value="">Selecione</Option>
+                                                {repeticoes.map(
+                                                    (rep, i) => (
+                                                        <option
+                                                            key={i}
+                                                            value={rep}
+                                                        >
+                                                            {rep}
+                                                        </option>
+                                                    )
+                                                )}
+                                            </Select>
                                         </TableCell>
                                         <TableCell>
                                             <Title>Tempo de Descanso</Title>
                                             <Select
-                                                name="restTime"
-                                                value={exercise.restTime}
+                                                name="descanso"
+                                                value={exerciciosPorDia.descanso}
                                                 onChange={(event) =>
-                                                    this.handleInputChange(index, event)
+                                                    this.handleInputChange(event)
                                                 }
                                             >
                                                 <Option value="">Selecione</Option>
+                                                {descanso.map(
+                                                    (rest, i) => (
+                                                        <option
+                                                            key={i}
+                                                            value={rest}
+                                                        >
+                                                            {rest}
+                                                        </option>
+                                                    )
+                                                )}
                                             </Select>
                                         </TableCell>
                                         <TableCell>
                                             <Title>Observações</Title>
                                             <Input
                                                 type="text"
-                                                name="observations"
-                                                value={exercise.observations}
+                                                name="observacao"
+                                                value={exerciciosPorDia.observacao}
                                                 onChange={(event) =>
-                                                    this.handleInputChange(index, event)
+                                                    this.handleInputChange(event)
                                                 }
                                             />
                                         </TableCell>
                                         <TableCell className="actions">
-                                            {index === exerciciosPorDia.length - 1 && (
-                                                <Button
-                                                    onClick={() =>
-                                                        this.handleAddExercise()
-                                                    }
-                                                >
-                                                    +
-                                                </Button>
-                                            )}
-                                            {index !== exerciciosPorDia.length - 1 && (
-                                                <Button
-                                                    onClick={() =>
-                                                        this.handleRemoveExercise(index)
-                                                    }
-                                                >
-                                                    x
-                                                </Button>
-                                            )}
+                                            <Button
+                                                onClick={() =>
+                                                    this.handleAddexercicio()
+                                                }
+                                            >
+                                                +
+                                            </Button>
                                         </TableCell>
                                     </TableRow>
                                 </tbody>
                             </Table>
-                        ))}
                     </div>
                 </Container>
             </div>

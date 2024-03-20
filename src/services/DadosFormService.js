@@ -14,18 +14,22 @@ export default class DadosFormService {
     static createAluno(aluno) {
         const newKey = firebaseDatabase.push(firebaseDatabase.child(firebaseDatabase.ref(db), 'alunos')).key;
 
-        firebaseDatabase.set(firebaseDatabase.ref(db, 'alunos/' + newKey + '/dadosPessoais/'), {
-           nome: aluno.nome,
-           dataNascimento: aluno.dataNascimento,
-           cidade: aluno.endCidade,
-           estado: aluno.endEstado,
-           telefone: aluno.telefone,
-           dataCadastro: new Date().toLocaleString(),
-           pesoJejum: aluno.pesoJejum,
-           altura: aluno.altura,
-           horarioTreino: aluno.horarioTreino,
-           tipoTreino: aluno.tipoTreino,
-           isNew: true
+        firebaseDatabase.set(firebaseDatabase.ref(db, 'alunos/' + newKey), {
+            ativo: true,
+            id: newKey,
+            dadosPessoais: {
+               nome: aluno.nome,
+               dataNascimento: aluno.dataNascimento,
+               cidade: aluno.endCidade,
+               estado: aluno.endEstado,
+               telefone: aluno.telefone,
+               dataCadastro: new Date().toLocaleString(),
+               pesoJejum: aluno.pesoJejum,
+               altura: aluno.altura,
+               horarioTreino: aluno.horarioTreino,
+               tipoTreino: aluno.tipoTreino,
+               isNew: true
+           }
         });
     }
 }

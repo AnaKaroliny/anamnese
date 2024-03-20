@@ -119,10 +119,10 @@ class Forms extends React.Component {
                                         <Link to={`/aluno/${item.id}/dadosPessoais`} key="info" className="item-button">
                                             <FontAwesomeIcon icon={faAddressCard} />
                                         </Link>
-                                        <Link to={`/aluno/${item.nome}`} key="aluno" className="item-button">
+                                        <Link to={`/aluno/${item.id}`} key="aluno" className="item-button">
                                             <FontAwesomeIcon icon={faFileMedical} />
                                         </Link>
-                                        <Link to={`/cadastroTreino/${item.nome}`} key="treino" className="item-button">
+                                        <Link to={`/cadastroTreino/${item.id}`} key="treino" className="item-button">
                                             <FontAwesomeIcon icon={faDumbbell} />
                                         </Link>
                                     </div>

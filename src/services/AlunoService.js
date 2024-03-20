@@ -20,7 +20,7 @@ export default class AlunosService {
         });
     };
 
-    static updateAlunoDadosPessoais = async (id, dadosPessoais, callback) => {
+    static updateDadosPessoais = async (id, dadosPessoais, callback) => {
         firebaseDatabase.update(firebaseDatabase.ref(db, `alunos/${id}/dadosPessoais/`), {
             dadosPessoais: dadosPessoais
         })
@@ -35,5 +35,25 @@ export default class AlunosService {
                 error: error
             });
         });
+    };
+
+    static getTreinos = async (id, diaDaSemana, callback) => {
+        const starCountRef = firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/`);
+
+        firebaseDatabase.onValue(starCountRef, (snapshot) => {
+            const data = snapshot.val();
+            callback(data);
+        });
+    };
+
+    static updateTreinos = async (id, treino, diaDaSemana) => {
+        const newKey = firebaseDatabase.push(firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/`)).key;
+        treino.id = newKey;
+
+        firebaseDatabase.set(firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/${newKey}/`), treino);
+    };
+
+    static removerExercicioDoTreino = async (id, diaDaSemana, exercicioId) => {
+        firebaseDatabase.remove(firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/${exercicioId}`));
     };
 }
