@@ -126,6 +126,11 @@ class CadastroTreino extends React.Component {
     };
 
     handleTabClick = (day) => {
+        AlunoService.getTreinos(this.props.params.id, day, (treinos) => {
+            const treinosAux = treinos ? Object.values(treinos) : [];
+            this.setState({ treinos: treinosAux });
+        });
+
         this.setState({ activeTab: day });
     };
 
