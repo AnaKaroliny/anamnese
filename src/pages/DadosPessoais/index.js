@@ -52,6 +52,7 @@ function DadosPessoais() {
                             <Form.Label>Endereço</Form.Label>
                             <Col xs={8}>
                                 <Form.Control
+                                    type="text"
                                     name="endCidade"
                                     placeholder="Cidade"
                                     onChange={myContext.handleChange.bind(this)}
@@ -60,6 +61,7 @@ function DadosPessoais() {
                             </Col>
                             <Col>
                                 <Form.Control
+                                    type="text"
                                     name="endEstado"
                                     placeholder="Estado"
                                     onChange={myContext.handleChange.bind(this)}

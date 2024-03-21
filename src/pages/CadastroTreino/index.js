@@ -319,6 +319,7 @@ class CadastroTreino extends React.Component {
                                             />
                                         </TableCell>
                                         <TableCell className="actions">
+                                            <Title>Adicionar</Title>
                                             <Button
                                                 onClick={() =>
                                                     this.handleAddexercicio()

@@ -3,12 +3,26 @@ import { Container, Form, FormGroup, Label, Input, Button, Title, InputGroup } f
 import { useParams } from 'react-router-dom';
 
 import HeaderForm from '../../components/HeaderForm';
+import AlunoService from '../../services/AlunoService';
 
 class Aluno extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            nomeAluno: '',
+        };
+    }
+
+    componentDidMount() {
+        AlunoService.getAluno(this.props.params.id, (aluno) => {
+            this.setState({ nomeAluno: aluno.dadosPessoais.nome });
+        });
+    }
+
     render() {
         return (
             <div>
-                <HeaderForm title={"Formulário de medidas: " + this.props.params.name} />
+                <HeaderForm title={"Formulário de medidas: " + this.state.nomeAluno} />
                 <Container>
                     <Form>
                         <div className="form-group">

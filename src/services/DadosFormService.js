@@ -28,6 +28,12 @@ export default class DadosFormService {
                altura: aluno.altura,
                horarioTreino: aluno.horarioTreino,
                tipoTreino: aluno.tipoTreino,
+               descricaoHorasSono: aluno.descricaoHorasSono,
+               descricaoObjetivo: aluno.descricaoObjetivo,
+               descricaoTreino: aluno.descricaoTreino,
+               descricaoLesoes: aluno.descricaoLesoes,
+               descricaoMedicamento: aluno.descricaoMedicamento,
+               descricaoDoenca: aluno.descricaoDoenca,
                isNew: true
            }
         });

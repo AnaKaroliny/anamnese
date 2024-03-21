@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { IconContext } from 'react-icons';
 import { Link } from 'react-router-dom';
+import AppContext from '../../components/AppContext';
 
 import { Container, Footer } from './styles';
 import colors from '../../styles/colors';
 
-export default function navBottomButton({ numberPage, backPage, nextPage }) {
+export default function NavBottomButton({ numberPage, backPage, nextPage }) {
+    const myContext = useContext(AppContext);
+
     return (
         <Container>
             <Footer>
@@ -30,7 +33,11 @@ export default function navBottomButton({ numberPage, backPage, nextPage }) {
                     </div>
                     {
                         nextPage ?
-                            <Link to={nextPage}>
+                            <Link to={nextPage} onClick={(event) => {
+                                if (!myContext.handleNextPage(nextPage)) {
+                                  event.preventDefault();
+                                }
+                              }}>
                                 <IconContext.Provider value={{ color: colors.white, size: 30 }}>
                                     <FaChevronRight />
                                 </IconContext.Provider>

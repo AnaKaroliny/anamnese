@@ -12,7 +12,7 @@ function DadosCorporais() {
 
     return (
         <div>
-            <HeaderForm />
+            <HeaderForm title={"Dados Corporais"} />
             <FormContainer>
                 <Form>
                     <Form.Group className="mb-3" controlId="formBasicPesoEmJejum">

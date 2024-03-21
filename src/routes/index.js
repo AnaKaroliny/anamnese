@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
     BrowserRouter as Router,
     Route,
     Routes,
-    Navigate,
+    Navigate
     // HashRouter
 } from "react-router-dom";
 import AppContext from "../components/AppContext";
@@ -31,9 +31,28 @@ var isAuthenticated = () => {
 };
 
 const PrivateRoute = ({ children }) => {
+    //TO-DO: Trocar por função que verifica se o usuário está logado
     const authed = isAuthenticated() // isauth() returns true or false based on localStorage
     
     return authed ? children : <Navigate to="/" />;
+}
+
+function ValidatePage({ children }) {
+    const myContext = useContext(AppContext);
+    const formAluno = myContext.formAluno;
+
+    console.log(children.type.name)
+
+    if (children.type.name === 'DadosCorporais' && (!formAluno || !formAluno.nome || !formAluno.telefone || !formAluno.endCidade || !formAluno.endEstado)) {
+        return <Navigate to="/dadosPessoais" />
+    }
+
+    if ((children.type.name === 'DadosDeSaúde' || children.type.name === 'Dados' || children.type.name === 'Dados2' || children.type.name === 'SubmitForm' || children.type.name === 'FormSent') && 
+    (!formAluno || !formAluno.nome || !formAluno.telefone || !formAluno.endCidade || !formAluno.endEstado || !formAluno.pesoJejum || !formAluno.altura || !formAluno.dataNascimento || !formAluno.horarioTreino || !formAluno.tipoTreino)) {
+        return <Navigate to="/dadosPessoais" />
+    }
+
+    return children;
 }
 
 function GetUserSettings() {
@@ -44,33 +63,41 @@ function GetUserSettings() {
         let fieldValue = event.target.value;
 
         setFormAluno({...formAluno, [fieldName]: fieldValue});
-        console.log(formAluno);
     }
+
+    function validateForm(nextPage) {
+        if (nextPage === '/corporal') {
+            return formAluno.nome && formAluno.telefone && formAluno.endCidade && formAluno.endEstado;
+        }
+
+        if (nextPage === '/saude') {
+            return formAluno.pesoJejum && formAluno.altura && formAluno.dataNascimento && formAluno.horarioTreino && formAluno.tipoTreino;
+        }
+
+        return true;
+    }
+
+    function handleNextPage(nextPage) {
+        if (validateForm(nextPage)) {
+            return true;
+        } else {
+            // TO-DO: Trocar por mensagem de erro
+            alert('Please fill in all the required fields.');
+            return false;
+        }
+    };
+
 
     const userSettings = {
         formAluno: formAluno,
-        handleChange
+        handleChange,
+        handleNextPage
     };
 
     return userSettings
 }
 
 function AllRoutes() {
-    // const [formAluno, setFormAluno] = useState({ fieldName: '' });
-
-    // function handleChange(event) {
-    //     let fieldName = event.target.name;
-    //     let fieldValue = event.target.value;
-
-    //     setFormAluno({...formAluno, [fieldName]: fieldValue});
-    //     console.log(formAluno);
-    // }
-
-    // const userSettings = {
-    //     formAluno: formAluno,
-    //     handleChange
-    // };
-
     return (
         <AppContext.Provider value={GetUserSettings()}>
             {/* Rota para github pages */}
@@ -83,12 +110,12 @@ function AllRoutes() {
 
                         {/* User routes */}
                         <Route path="/dadosPessoais" element={<DadosPessoais />} />
-                        <Route path="/corporal" element={<DadosCorporais />} />
-                        <Route path="/saude" element={<DadosDeSaude />} />
-                        <Route path="/dados" element={<Dados />} />
-                        <Route path="/dados2" element={<Dados2 />} />
-                        <Route path="/submit" element={<SubmitForm />} />
-                        <Route path="/sent" element={<FormSent />} />
+                        <Route path="/corporal" element={<ValidatePage><DadosCorporais /></ValidatePage>} />
+                        <Route path="/saude" element={<ValidatePage><DadosDeSaude /></ValidatePage>} />
+                        <Route path="/dados" element={<ValidatePage><Dados /></ValidatePage>} />
+                        <Route path="/dados2" element={<ValidatePage><Dados2 /></ValidatePage>} />
+                        <Route path="/submit" element={<ValidatePage><SubmitForm /></ValidatePage>} />
+                        <Route path="/sent" element={<ValidatePage><FormSent /></ValidatePage>} />
                         <Route path="/treino" element={<PrivateRoute><Treino /></PrivateRoute>} />
                         <Route path="/treinoDiario/:dia" element={<PrivateRoute><TreinoDiario /></PrivateRoute>} />
 

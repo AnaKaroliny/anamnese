@@ -1,30 +1,30 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
 
-import AlunoRoutes from '../../routes/AlunoRoutes';
-import AppContext from '../../components/AppContext';
-import 'bootstrap/dist/css/bootstrap.css';
+// import AlunoRoutes from '../../routes/AlunoRoutes';
+// import AppContext from '../../components/AppContext';
+// import 'bootstrap/dist/css/bootstrap.css';
 
-function FormAluno() {
-    const [formAluno, setFormAluno] = useState({});
+// function FormAluno() {
+//     const [formAluno, setFormAluno] = useState({});
 
-    function handleChange(event) {
-        let fieldName = event.target.name;
-        let fieldValue = event.target.value;
+//     function handleChange(event) {
+//         let fieldName = event.target.name;
+//         let fieldValue = event.target.value;
 
-        setFormAluno({...formAluno, [fieldName]: fieldValue});
-        console.log(formAluno);
-    }
+//         setFormAluno({...formAluno, [fieldName]: fieldValue});
+//         console.log(formAluno);
+//     }
 
-    const userSettings = {
-        formAluno: formAluno,
-        handleChange
-    };
+//     const userSettings = {
+//         formAluno: formAluno,
+//         handleChange
+//     };
 
-    return (
-        <AppContext.Provider value={userSettings}>
-            <AlunoRoutes />
-        </AppContext.Provider>
-    );
-}
+//     return (
+//         <AppContext.Provider value={userSettings}>
+//             <AlunoRoutes />
+//         </AppContext.Provider>
+//     );
+// }
 
-export default FormAluno;
+// export default FormAluno;

@@ -61,7 +61,7 @@ export const TableRow = styled.tr`
 
 export const TableCell = styled.td`
     flex: 1;
-    padding-bottom: 10px;
+    padding: 10px;
     width: 100%;
     margin-right: 10px;
 `;
@@ -74,11 +74,12 @@ export const Title = styled.h6`
 `;
 
 export const Button = styled.button`
-    margin-top: 30px;
-    padding: 5px 10px;
-    background-color: #ccc;
+    margin-bottom: 6px;
+    padding: 4px 10px 6px 10px;
+    background-color: ${colors.primary};
     border: none;
     color: #fff;
+    font-weight: bold;
     cursor: pointer;
 `;
 
