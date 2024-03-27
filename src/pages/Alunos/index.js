@@ -8,12 +8,14 @@ import { faDumbbell, faAddressCard, faCircleMinus, faFileMedical } from '@fortaw
 import HeaderForm from '../../components/HeaderForm';
 import AlunoService from '../../services/AlunoService';
 import ReactPaginate from 'react-paginate';
+import AlunosService from '../../services/AlunoService';
 
 class Forms extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             filter: 'new',
+            activeFilter: 'active',
             searchQuery: '',
             alunos: [],
             offset: 0, // offset inicial para a paginação
@@ -25,7 +27,7 @@ class Forms extends React.Component {
     componentDidMount() {
         AlunoService.getAlunos((alunos) => {
             const alunosList = Object.entries(alunos).map(([id, item]) => {
-                return { id, nome: item.dadosPessoais.nome, isNew: item.dadosPessoais.isNew };
+                return { id, ativo: item.ativo, nome: item.dadosPessoais.nome, isNew: item.dadosPessoais.isNew };
             });
             this.setState({ alunos: alunosList });
         });
@@ -33,6 +35,10 @@ class Forms extends React.Component {
 
     handleFilterChange = (event) => {
         this.setState({ filter: event.target.value });
+    }
+
+    handleActiveFilterChange = (event) => {
+        this.setState({ activeFilter: event.target.value });
     }
 
     handleSearchChange = (event) => {
@@ -49,8 +55,14 @@ class Forms extends React.Component {
         });
     };
 
+    handleActiveChange = (id, ativo) => {
+        AlunosService.ativarOuDesativar(id, ativo, (result) => {
+            console.log(result);
+        });
+    }
+
     filterItems = () => {
-        const { filter, searchQuery, alunos, offset, perPage } = this.state;
+        const { filter, activeFilter, searchQuery, alunos, offset, perPage } = this.state;
 
         // Filter the list items based on the filter value
         const filteredAlunosAux = alunos.filter(item => {
@@ -64,9 +76,18 @@ class Forms extends React.Component {
                 isNew = !item.isNew;
             }
 
+            var active = false;
+            if (activeFilter === 'all') {
+                active = true;
+            } else if (activeFilter === 'active') {
+                active = item.ativo;
+            } else if (activeFilter === 'notActive') {
+                active = !item.ativo;
+            }
+
             // Filter based on the search query
             const searchRegex = new RegExp(searchQuery, 'i');
-            return isNew && searchRegex.test(item.nome);
+            return isNew && active && searchRegex.test(item.nome);
         });
 
         var numAlunos = filteredAlunosAux.length;
@@ -85,7 +106,7 @@ class Forms extends React.Component {
     }
 
     render() {
-        const { filter, searchQuery } = this.state;
+        const { filter, activeFilter, searchQuery } = this.state;
         var filterObject = this.filterItems();
 
         return (
@@ -99,6 +120,14 @@ class Forms extends React.Component {
                                 <option value="all">Todos</option>
                                 <option value="new">Novos</option>
                                 <option value="old">Antigos</option>
+                            </select>
+                        </label>
+                        <label className="filter-select">
+                            Selecione:
+                            <select value={activeFilter} onChange={this.handleActiveFilterChange}>
+                                <option value="all">Todos</option>
+                                <option value="active">Ativos</option>
+                                <option value="notActive">Não ativos</option>
                             </select>
                         </label>
                         <label className="filter-search">
@@ -124,6 +153,9 @@ class Forms extends React.Component {
                                         </Link>
                                         <Link to={`/cadastroTreino/${item.id}`} key="treino" className="item-button">
                                             <FontAwesomeIcon icon={faDumbbell} />
+                                        </Link>
+                                        <Link key="desativar" className={`item-button ${item.ativo ? 'item-button-active' : 'item-button-inactive'}`} onClick={() => this.handleActiveChange(item.id, !item.ativo)}>
+                                            <FontAwesomeIcon icon={faCircleMinus} />
                                         </Link>
                                     </div>
                                 </div>

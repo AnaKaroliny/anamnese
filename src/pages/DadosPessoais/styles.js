@@ -15,4 +15,17 @@ export const FormContainer = styled.div`
         color: ${colors.darkGrayText};
         font-weight: 500;
     }
+
+    .form-control {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+
+        &:focus {
+            outline: none;
+            border-color: ${colors.primary};
+        }
+    }
 `;

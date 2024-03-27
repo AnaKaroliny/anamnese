@@ -16,13 +16,21 @@ export const Container = styled.div`
 
             select {
                 width: 60%;
-                height: 30px;
+                height: 35px;
                 border: 1px solid;
                 border-radius: 5px;
                 padding: 5px;
                 font-size: 15px;
                 color: ${colors.darkGrayText};
                 font-weight: 500;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+
+                &:focus {
+                    outline: none;
+                    border-color: ${colors.primary};
+                }
             }
         }
 
@@ -45,6 +53,15 @@ export const Container = styled.div`
         input {
             margin-left: 10px;
             width: 60%;
+            padding: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+            &:focus {
+                outline: none;
+                border-color: ${colors.primary};
+            }
         }
 
         @media (max-width: 845px) {
@@ -94,10 +111,18 @@ export const Container = styled.div`
             text-decoration: none;
             font-weight: bold;
             font-size: 20px;
-        
+
             &:hover {
                 color: ${colors.primary};
             }
+        }
+
+        .item-button-active {
+            color: ${colors.primary};
+        }
+
+        .item-button-inactive {
+            color: ${colors.danger};
         }
     }
 

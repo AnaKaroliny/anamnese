@@ -56,4 +56,21 @@ export default class AlunosService {
     static removerExercicioDoTreino = async (id, diaDaSemana, exercicioId) => {
         firebaseDatabase.remove(firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/${exercicioId}`));
     };
+
+    static ativarOuDesativar = async (id, ativo, callback) => {
+        firebaseDatabase.update(firebaseDatabase.ref(db, `alunos/${id}/`), {
+            ativo: ativo
+        })
+        .then(() => {
+            callback({
+                success: true
+            });
+        })
+        .catch((error) => {
+            callback({
+                success: false,
+                error: error
+            });
+        });
+    };
 }
