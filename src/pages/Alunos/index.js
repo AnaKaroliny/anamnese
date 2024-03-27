@@ -14,7 +14,7 @@ class Forms extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            filter: 'new',
+            filter: 'all',
             activeFilter: 'active',
             searchQuery: '',
             alunos: [],

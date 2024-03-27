@@ -104,10 +104,12 @@ class CadastroTreino extends React.Component {
         this.setState({ exerciciosPorDia });
     };
 
-    handleAddexercicio = () => {
+    handleAddExercicio = () => {
         const { exerciciosPorDia, activeTab } = this.state;
 
-        AlunoService.updateTreinos(this.props.params.id, exerciciosPorDia, activeTab);
+        AlunoService.updateTreinos(this.props.params.id, exerciciosPorDia, activeTab, (result) => {
+            console.log(result);
+        });
 
         this.setState({ 
             exerciciosPorDia: {
@@ -322,7 +324,7 @@ class CadastroTreino extends React.Component {
                                             <Title>Adicionar</Title>
                                             <Button
                                                 onClick={() =>
-                                                    this.handleAddexercicio()
+                                                    this.handleAddExercicio()
                                                 }
                                             >
                                                 +

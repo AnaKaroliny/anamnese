@@ -46,11 +46,26 @@ export default class AlunosService {
         });
     };
 
-    static updateTreinos = async (id, treino, diaDaSemana) => {
+    static updateTreinos = async (id, treino, diaDaSemana, callback) => {
         const newKey = firebaseDatabase.push(firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/`)).key;
         treino.id = newKey;
 
-        firebaseDatabase.set(firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/${newKey}/`), treino);
+        firebaseDatabase.set(firebaseDatabase.ref(db, `alunos/${id}/treinos/${diaDaSemana}/${newKey}/`), treino)
+        .then(() => {
+            callback({
+                success: true
+            });
+        })
+        .catch((error) => {
+            callback({
+                success: false,
+                error: error
+            });
+        });
+
+        firebaseDatabase.update(firebaseDatabase.ref(db, `alunos/${id}/dadosPessoais/`), {
+            isNew: false
+        });
     };
 
     static removerExercicioDoTreino = async (id, diaDaSemana, exercicioId) => {
