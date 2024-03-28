@@ -10,7 +10,7 @@ import AlunoService from '../../services/AlunoService';
 import ReactPaginate from 'react-paginate';
 import AlunosService from '../../services/AlunoService';
 
-class Forms extends React.Component {
+class Alunos extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -180,4 +180,4 @@ class Forms extends React.Component {
     }
 }
 
-export default Forms;
+export default Alunos;

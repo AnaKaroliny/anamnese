@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
     BrowserRouter as Router,
     Route,
@@ -25,23 +25,15 @@ import CadastroTreino from "../pages/CadastroTreino";
 import AlunoDadosPessoais from "../pages/AlunoDadosPessoais";
 
 import Login from "../pages/Login";
+import LoginService from "../services/LoginService";
 
-var isAuthenticated = () => {
-    return true;
-};
-
-const PrivateRoute = ({ children }) => {
-    //TO-DO: Trocar por função que verifica se o usuário está logado
-    const authed = isAuthenticated() // isauth() returns true or false based on localStorage
-    
-    return authed ? children : <Navigate to="/" />;
+const PrivateRoute = ({ children, isLogged }) => {
+    return isLogged ? children : <Navigate to="/login" />;
 }
 
 function ValidatePage({ children }) {
     const myContext = useContext(AppContext);
     const formAluno = myContext.formAluno;
-
-    console.log(children.type.name)
 
     if (children.type.name === 'DadosCorporais' && (!formAluno || !formAluno.nome || !formAluno.telefone || !formAluno.endCidade || !formAluno.endEstado)) {
         return <Navigate to="/dadosPessoais" />
@@ -55,7 +47,7 @@ function ValidatePage({ children }) {
     return children;
 }
 
-function GetUserSettings() {
+function useUserSettings() {
     const [formAluno, setFormAluno] = useState({});
 
     function handleChange(event) {
@@ -98,15 +90,35 @@ function GetUserSettings() {
 }
 
 function AllRoutes() {
+    const [logged, setLogged] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const userSettings = useUserSettings(); // Chame o Hook personalizado aqui
+
+    useEffect(() => {
+        const unsubscribe = LoginService.onAuthStateChanged((response) => {
+            setLogged(response.success);
+            setLoading(false);
+        });
+
+        return () => {
+            unsubscribe(); // Cleanup function to unsubscribe from the onAuthStateChanged event
+        };
+    }, []);
+
+    if (loading) {
+        // TO DO: Melhorar loading
+        return <div>Loading...</div>;
+    }
+
     return (
-        <AppContext.Provider value={GetUserSettings()}>
+        <AppContext.Provider value={userSettings}>
             {/* Rota para github pages */}
             {/* <HashRouter basename={process.env.PUBLIC_URL}> */}
             <Router basename={process.env.PUBLIC_URL}>
                 <div>
                     <Routes>
                         <Route exact path="/" element={<Login />} />
-                        <Route path="/anamnese" element={<Login />} />
+                        <Route path="/login" element={<Login />} />
 
                         {/* User routes */}
                         <Route path="/dadosPessoais" element={<DadosPessoais />} />
@@ -116,15 +128,15 @@ function AllRoutes() {
                         <Route path="/dados2" element={<ValidatePage><Dados2 /></ValidatePage>} />
                         <Route path="/submit" element={<ValidatePage><SubmitForm /></ValidatePage>} />
                         <Route path="/sent" element={<ValidatePage><FormSent /></ValidatePage>} />
-                        <Route path="/treino" element={<PrivateRoute><Treino /></PrivateRoute>} />
-                        <Route path="/treinoDiario/:dia" element={<PrivateRoute><TreinoDiario /></PrivateRoute>} />
+                        <Route path="/treino" element={<Treino />} />
+                        <Route path="/treinoDiario/:dia" element={<TreinoDiario />} />
 
                         {/* Admin routes */}
-                        <Route path="/alunos" element={<PrivateRoute><Alunos /></PrivateRoute>} />
-                        <Route path="/aluno/:id" element={<PrivateRoute><Aluno /></PrivateRoute>} />
-                        <Route path="/aluno/:id/dadosPessoais" element={<PrivateRoute><AlunoDadosPessoais /></PrivateRoute>} />
-                        <Route path="/cadastroExercicio" element={<PrivateRoute><CadastroExercicio /></PrivateRoute>} />
-                        <Route path="/cadastroTreino/:id" element={<PrivateRoute><CadastroTreino /></PrivateRoute>} />
+                        <Route path="/alunos" element={<PrivateRoute isLogged={logged}><Alunos /></PrivateRoute>} />
+                        <Route path="/aluno/:id" element={<PrivateRoute isLogged={logged}><Aluno /></PrivateRoute>} />
+                        <Route path="/aluno/:id/dadosPessoais" element={<PrivateRoute isLogged={logged}><AlunoDadosPessoais /></PrivateRoute>} />
+                        <Route path="/cadastroExercicio" element={<PrivateRoute isLogged={logged}><CadastroExercicio /></PrivateRoute>} />
+                        <Route path="/cadastroTreino/:id" element={<PrivateRoute isLogged={logged}><CadastroTreino /></PrivateRoute>} />
                     </Routes>
                 </div>
             </Router>

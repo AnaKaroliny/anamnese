@@ -66,3 +66,14 @@ export const Title = styled.h1`
     font-size: 20px;
     padding-bottom: 20px;
 `;
+
+export const LogoutButton = styled.button`
+    background-color: ${colors.black};
+    color: ${colors.white};
+    border: none;
+    cursor: pointer;
+    font-size: 22px;
+    &:hover {
+        color: ${colors.primary};
+    }
+`;
